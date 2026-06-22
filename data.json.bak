@@ -1,0 +1,1281 @@
+{
+  "users": [
+    {
+      "id": "user-1",
+      "name": "Sarah Mitchell",
+      "email": "sarah@example.com",
+      "password": "demo1234",
+      "role": "primary_caregiver",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&auto=format",
+      "createdAt": "2026-01-15T08:00:00Z"
+    }
+  ],
+  "patientState": {
+    "id": "patient-1",
+    "name": "Eleanor M.",
+    "age": 82,
+    "image": "https://images.unsplash.com/photo-1581579438747-104c53e7a78e?w=120&h=120&fit=crop&auto=format",
+    "wellnessScore": 86,
+    "weeklyChange": "+4 vs last wk",
+    "summary": "Eleanor slept well, took morning meds, and walked 1,840 steps. Mood trending warm.",
+    "stats": {
+      "meds": {
+        "value": "2 / 5",
+        "hint": "1 pending 2:00 PM",
+        "tone": "amber"
+      },
+      "sleep": {
+        "value": "7h 12m",
+        "hint": "Restful",
+        "tone": "indigo"
+      },
+      "mood": {
+        "value": "Warm",
+        "hint": "↑ 12% wk",
+        "tone": "emerald"
+      }
+    },
+    "details": {
+      "sleepQuality": "Excellent",
+      "sleepDuration": "7h 12m",
+      "sleepTone": "emerald",
+      "hydration": "Below goal",
+      "hydrationValue": "4 / 8 cups",
+      "hydrationTone": "amber",
+      "steps": "On track",
+      "stepsValue": "1,840",
+      "stepsTone": "indigo"
+    },
+    "summaryStatus": {
+      "acknowledged": false,
+      "time": "9:42 AM",
+      "text": "Eleanor's voice tone is steady and her morning routine is on track. She mentioned slight knee stiffness — I've suggested a gentle stretch and flagged it for Dr. Chen's Friday call."
+    },
+    "alerts": [
+      {
+        "id": "alert-1",
+        "sev": "warn",
+        "t": "Fall risk: moderate",
+        "d": "Slower gait pattern over 3 days. Suggested: balance routine + remove hallway rug.",
+        "c": "amber",
+        "resolved": false,
+        "createdAt": "2026-06-09T07:30:00Z"
+      },
+      {
+        "id": "alert-2",
+        "sev": "info",
+        "t": "Med reminder: Lisinopril",
+        "d": "Pending 2:00 PM",
+        "c": "indigo",
+        "resolved": false,
+        "createdAt": "2026-06-09T08:00:00Z"
+      },
+      {
+        "id": "alert-3",
+        "sev": "good",
+        "t": "Mood improved 18%",
+        "d": "Compared to last week",
+        "c": "emerald",
+        "resolved": false,
+        "createdAt": "2026-06-09T09:00:00Z"
+      }
+    ],
+    "medications": [
+      {
+        "id": "med-1",
+        "name": "Aspirin (81mg)",
+        "time": "8:00 AM",
+        "taken": true,
+        "dosage": "81mg",
+        "frequency": "daily",
+        "prescriber": "Dr. Chen",
+        "notes": "Take with food"
+      },
+      {
+        "id": "med-2",
+        "name": "Multivitamin",
+        "time": "8:00 AM",
+        "taken": true,
+        "dosage": "1 tablet",
+        "frequency": "daily",
+        "prescriber": "Self",
+        "notes": ""
+      },
+      {
+        "id": "med-3",
+        "name": "Lisinopril (10mg)",
+        "time": "2:00 PM",
+        "taken": false,
+        "dosage": "10mg",
+        "frequency": "daily",
+        "prescriber": "Dr. Chen",
+        "notes": "Monitor blood pressure"
+      },
+      {
+        "id": "med-4",
+        "name": "Melatonin (3mg)",
+        "time": "9:00 PM",
+        "taken": false,
+        "dosage": "3mg",
+        "frequency": "daily",
+        "prescriber": "Self",
+        "notes": "For sleep support"
+      },
+      {
+        "id": "med-c00bd64f",
+        "name": "Monticope",
+        "time": "9:00 AM",
+        "taken": false,
+        "dosage": "1 tablet",
+        "frequency": "daily",
+        "prescriber": "Rocky AI",
+        "notes": ""
+      }
+    ],
+    "timeline": [
+      {
+        "id": "t-1781112988812",
+        "time": "11:06 PM",
+        "title": "Lisinopril (10mg) marked as pending",
+        "desc": "Updated by Caregiver.",
+        "type": "med"
+      },
+      {
+        "id": "t-1781112987691",
+        "time": "11:06 PM",
+        "title": "Lisinopril (10mg) marked as taken",
+        "desc": "Updated by Caregiver.",
+        "type": "med"
+      },
+      {
+        "id": "t-1781112983813",
+        "time": "11:06 PM",
+        "title": "Lisinopril (10mg) marked as pending",
+        "desc": "Updated by Caregiver.",
+        "type": "med"
+      },
+      {
+        "id": "t-1781112982519",
+        "time": "11:06 PM",
+        "title": "Lisinopril (10mg) marked as taken",
+        "desc": "Updated by Caregiver.",
+        "type": "med"
+      },
+      {
+        "id": "t-1781112857007",
+        "time": "11:04 PM",
+        "title": "New medication scheduled: Monticope",
+        "desc": "1 tablet — Scheduled for 9:00 AM daily.",
+        "type": "med"
+      },
+      {
+        "id": "t-1",
+        "time": "9:42 AM",
+        "title": "Daily voice check-in completed",
+        "desc": "Eleanor reports slight knee stiffness, otherwise positive mood.",
+        "type": "voice"
+      },
+      {
+        "id": "t-2",
+        "time": "8:30 AM",
+        "title": "Morning medication taken",
+        "desc": "Aspirin and Multivitamin checked off.",
+        "type": "med"
+      },
+      {
+        "id": "t-3",
+        "time": "7:12 AM",
+        "title": "Sleep telemetry synced",
+        "desc": "7h 12m of restful sleep recorded via wearable.",
+        "type": "sensor"
+      },
+      {
+        "id": "t-4",
+        "time": "Yesterday",
+        "title": "Respite session scheduled",
+        "desc": "Respite caregiver Jane scheduled for Thursday.",
+        "type": "team"
+      }
+    ]
+  },
+  "careTeam": [
+    {
+      "id": "ct-1",
+      "name": "Sarah Mitchell",
+      "role": "Primary caregiver",
+      "relationship": "Daughter",
+      "phone": "(512) 555-0147",
+      "email": "sarah@example.com",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&auto=format",
+      "active": true
+    },
+    {
+      "id": "ct-2",
+      "name": "Dr. Lisa Chen",
+      "role": "Primary care physician",
+      "relationship": "Provider",
+      "phone": "(512) 555-0290",
+      "email": "chen@baysidehealth.com",
+      "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=120&h=120&fit=crop&auto=format",
+      "active": true
+    },
+    {
+      "id": "ct-3",
+      "name": "Jane Reyes",
+      "role": "Respite caregiver",
+      "relationship": "Professional",
+      "phone": "(512) 555-0333",
+      "email": "jane.reyes@homecare.com",
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&auto=format",
+      "active": true
+    },
+    {
+      "id": "ct-4",
+      "name": "Mark Mitchell",
+      "role": "Family support",
+      "relationship": "Son",
+      "phone": "(512) 555-0501",
+      "email": "mark@example.com",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&auto=format",
+      "active": true
+    }
+  ],
+  "wellnessHistory": [
+    {
+      "date": "2026-05-12",
+      "wellnessScore": 88,
+      "mood": 84,
+      "sleep": 7.2,
+      "steps": 1895,
+      "hydration": 3,
+      "heartRate": 69,
+      "fallRisk": 0.1
+    },
+    {
+      "date": "2026-05-13",
+      "wellnessScore": 80,
+      "mood": 62,
+      "sleep": 5.6,
+      "steps": 1291,
+      "hydration": 8,
+      "heartRate": 69,
+      "fallRisk": 0.3
+    },
+    {
+      "date": "2026-05-14",
+      "wellnessScore": 79,
+      "mood": 68,
+      "sleep": 8.3,
+      "steps": 1998,
+      "hydration": 7,
+      "heartRate": 79,
+      "fallRisk": 0.09
+    },
+    {
+      "date": "2026-05-15",
+      "wellnessScore": 87,
+      "mood": 86,
+      "sleep": 7.3,
+      "steps": 2268,
+      "hydration": 6,
+      "heartRate": 71,
+      "fallRisk": 0.22
+    },
+    {
+      "date": "2026-05-16",
+      "wellnessScore": 77,
+      "mood": 72,
+      "sleep": 6.5,
+      "steps": 1069,
+      "hydration": 8,
+      "heartRate": 71,
+      "fallRisk": 0.26
+    },
+    {
+      "date": "2026-05-17",
+      "wellnessScore": 86,
+      "mood": 77,
+      "sleep": 6.6,
+      "steps": 2115,
+      "hydration": 8,
+      "heartRate": 72,
+      "fallRisk": 0.27
+    },
+    {
+      "date": "2026-05-18",
+      "wellnessScore": 86,
+      "mood": 76,
+      "sleep": 7,
+      "steps": 2588,
+      "hydration": 8,
+      "heartRate": 62,
+      "fallRisk": 0.17
+    },
+    {
+      "date": "2026-05-19",
+      "wellnessScore": 85,
+      "mood": 64,
+      "sleep": 8.2,
+      "steps": 2904,
+      "hydration": 8,
+      "heartRate": 69,
+      "fallRisk": 0.24
+    },
+    {
+      "date": "2026-05-20",
+      "wellnessScore": 80,
+      "mood": 82,
+      "sleep": 5.7,
+      "steps": 1706,
+      "hydration": 5,
+      "heartRate": 64,
+      "fallRisk": 0.11
+    },
+    {
+      "date": "2026-05-21",
+      "wellnessScore": 81,
+      "mood": 60,
+      "sleep": 6,
+      "steps": 1311,
+      "hydration": 8,
+      "heartRate": 69,
+      "fallRisk": 0.06
+    },
+    {
+      "date": "2026-05-22",
+      "wellnessScore": 88,
+      "mood": 61,
+      "sleep": 8.1,
+      "steps": 1449,
+      "hydration": 5,
+      "heartRate": 78,
+      "fallRisk": 0.05
+    },
+    {
+      "date": "2026-05-23",
+      "wellnessScore": 87,
+      "mood": 89,
+      "sleep": 5.5,
+      "steps": 2691,
+      "hydration": 7,
+      "heartRate": 71,
+      "fallRisk": 0.13
+    },
+    {
+      "date": "2026-05-24",
+      "wellnessScore": 83,
+      "mood": 56,
+      "sleep": 8,
+      "steps": 3145,
+      "hydration": 5,
+      "heartRate": 76,
+      "fallRisk": 0.16
+    },
+    {
+      "date": "2026-05-25",
+      "wellnessScore": 71,
+      "mood": 60,
+      "sleep": 6,
+      "steps": 3024,
+      "hydration": 6,
+      "heartRate": 70,
+      "fallRisk": 0.15
+    },
+    {
+      "date": "2026-05-26",
+      "wellnessScore": 74,
+      "mood": 74,
+      "sleep": 6,
+      "steps": 2910,
+      "hydration": 3,
+      "heartRate": 68,
+      "fallRisk": 0.25
+    },
+    {
+      "date": "2026-05-27",
+      "wellnessScore": 88,
+      "mood": 76,
+      "sleep": 7.2,
+      "steps": 2483,
+      "hydration": 4,
+      "heartRate": 79,
+      "fallRisk": 0.11
+    },
+    {
+      "date": "2026-05-28",
+      "wellnessScore": 81,
+      "mood": 73,
+      "sleep": 6.2,
+      "steps": 2733,
+      "hydration": 5,
+      "heartRate": 70,
+      "fallRisk": 0.1
+    },
+    {
+      "date": "2026-05-29",
+      "wellnessScore": 85,
+      "mood": 65,
+      "sleep": 7.2,
+      "steps": 1096,
+      "hydration": 4,
+      "heartRate": 63,
+      "fallRisk": 0.08
+    },
+    {
+      "date": "2026-05-30",
+      "wellnessScore": 87,
+      "mood": 68,
+      "sleep": 6.8,
+      "steps": 2191,
+      "hydration": 5,
+      "heartRate": 66,
+      "fallRisk": 0.21
+    },
+    {
+      "date": "2026-05-31",
+      "wellnessScore": 76,
+      "mood": 88,
+      "sleep": 6.8,
+      "steps": 1445,
+      "hydration": 7,
+      "heartRate": 64,
+      "fallRisk": 0.12
+    },
+    {
+      "date": "2026-06-01",
+      "wellnessScore": 85,
+      "mood": 64,
+      "sleep": 8.4,
+      "steps": 1328,
+      "hydration": 8,
+      "heartRate": 79,
+      "fallRisk": 0.29
+    },
+    {
+      "date": "2026-06-02",
+      "wellnessScore": 76,
+      "mood": 61,
+      "sleep": 6,
+      "steps": 2505,
+      "hydration": 6,
+      "heartRate": 75,
+      "fallRisk": 0.17
+    },
+    {
+      "date": "2026-06-03",
+      "wellnessScore": 72,
+      "mood": 63,
+      "sleep": 7.5,
+      "steps": 2190,
+      "hydration": 6,
+      "heartRate": 71,
+      "fallRisk": 0.28
+    },
+    {
+      "date": "2026-06-04",
+      "wellnessScore": 72,
+      "mood": 85,
+      "sleep": 5.8,
+      "steps": 2463,
+      "hydration": 3,
+      "heartRate": 67,
+      "fallRisk": 0.06
+    },
+    {
+      "date": "2026-06-05",
+      "wellnessScore": 72,
+      "mood": 63,
+      "sleep": 6.3,
+      "steps": 1639,
+      "hydration": 6,
+      "heartRate": 63,
+      "fallRisk": 0.23
+    },
+    {
+      "date": "2026-06-06",
+      "wellnessScore": 78,
+      "mood": 58,
+      "sleep": 5.7,
+      "steps": 2122,
+      "hydration": 4,
+      "heartRate": 74,
+      "fallRisk": 0.26
+    },
+    {
+      "date": "2026-06-07",
+      "wellnessScore": 74,
+      "mood": 84,
+      "sleep": 7.3,
+      "steps": 1325,
+      "hydration": 4,
+      "heartRate": 76,
+      "fallRisk": 0.07
+    },
+    {
+      "date": "2026-06-08",
+      "wellnessScore": 78,
+      "mood": 77,
+      "sleep": 6.5,
+      "steps": 1819,
+      "hydration": 6,
+      "heartRate": 66,
+      "fallRisk": 0.08
+    },
+    {
+      "date": "2026-06-09",
+      "wellnessScore": 80,
+      "mood": 57,
+      "sleep": 7.8,
+      "steps": 3040,
+      "hydration": 6,
+      "heartRate": 77,
+      "fallRisk": 0.12
+    },
+    {
+      "date": "2026-06-10",
+      "wellnessScore": 87,
+      "mood": 76,
+      "sleep": 7.9,
+      "steps": 1223,
+      "hydration": 9,
+      "heartRate": 65,
+      "fallRisk": 0.13
+    }
+  ],
+  "voiceCheckins": [
+    {
+      "id": "vc-1",
+      "date": "2026-06-09",
+      "time": "9:42 AM",
+      "duration": "3m 22s",
+      "transcript": "Good morning Rocky. I slept pretty well. My knee is a little stiff this morning but otherwise I feel good. I had some cereal and juice for breakfast. Looking forward to my walk later.",
+      "sentiment": "positive",
+      "sentimentScore": 0.82,
+      "flags": [
+        "knee_stiffness"
+      ],
+      "aiSummary": "Eleanor reports good sleep and positive mood. Slight knee stiffness noted — flagged for provider review. Breakfast consumed. Plans to walk today.",
+      "voiceTone": "steady",
+      "energy": "moderate"
+    },
+    {
+      "id": "vc-2",
+      "date": "2026-06-08",
+      "time": "9:38 AM",
+      "duration": "2m 45s",
+      "transcript": "Hi Rocky. I woke up a couple times last night. A bit tired today. Took my pills already. My daughter is coming by later which is nice.",
+      "sentiment": "neutral",
+      "sentimentScore": 0.61,
+      "flags": [
+        "interrupted_sleep"
+      ],
+      "aiSummary": "Interrupted sleep reported. Medication adherence confirmed. Social engagement expected (daughter visiting). Mild fatigue.",
+      "voiceTone": "slightly_low",
+      "energy": "low"
+    },
+    {
+      "id": "vc-3",
+      "date": "2026-06-07",
+      "time": "9:50 AM",
+      "duration": "4m 10s",
+      "transcript": "Morning! I had the best sleep in weeks. Feeling great today. I even did some stretches like you suggested. Having lunch with my friend Margaret today.",
+      "sentiment": "very_positive",
+      "sentimentScore": 0.95,
+      "flags": [],
+      "aiSummary": "Excellent sleep, high energy, positive social plans. Following through on recommended stretches. No concerns detected.",
+      "voiceTone": "bright",
+      "energy": "high"
+    }
+  ],
+  "carePlans": [
+    {
+      "id": "cp-1",
+      "title": "Morning balance routine",
+      "description": "10-minute gentle balance and stretching exercises before daily walk. Reduces fall risk by ~22%.",
+      "category": "exercise",
+      "status": "active",
+      "assignedTo": "Eleanor M.",
+      "createdBy": "Rocky AI",
+      "scheduledTime": "8:30 AM",
+      "daysOfWeek": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "completedToday": false
+    },
+    {
+      "id": "cp-2",
+      "title": "Hydration reminders",
+      "description": "Gentle reminders every 2 hours to drink water. Goal: 8 cups per day.",
+      "category": "nutrition",
+      "status": "active",
+      "assignedTo": "Eleanor M.",
+      "createdBy": "Rocky AI",
+      "scheduledTime": "Every 2h",
+      "daysOfWeek": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ],
+      "completedToday": false
+    },
+    {
+      "id": "cp-3",
+      "title": "Weekly telehealth with Dr. Chen",
+      "description": "Friday 2:00 PM video call to review weekly wellness and medication adjustments.",
+      "category": "medical",
+      "status": "active",
+      "assignedTo": "Sarah Mitchell",
+      "createdBy": "Sarah Mitchell",
+      "scheduledTime": "2:00 PM Friday",
+      "daysOfWeek": [
+        "Fri"
+      ],
+      "completedToday": false
+    },
+    {
+      "id": "cp-4",
+      "title": "Evening wind-down routine",
+      "description": "Dim lights, herbal tea, and 15 minutes of calming music before bed. Improves sleep quality.",
+      "category": "wellness",
+      "status": "active",
+      "assignedTo": "Eleanor M.",
+      "createdBy": "Rocky AI",
+      "scheduledTime": "8:30 PM",
+      "daysOfWeek": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ],
+      "completedToday": false
+    },
+    {
+      "id": "cp-89511fe2",
+      "title": "Bedtime routine",
+      "description": "Ensure Mark is settled for bed by 10:00 PM to improve sleep quality and maintain a consistent schedule.",
+      "category": "wellness",
+      "status": "active",
+      "assignedTo": "mark",
+      "createdBy": "Rocky AI",
+      "scheduledTime": "10:00 PM",
+      "daysOfWeek": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ],
+      "completedToday": false
+    },
+    {
+      "id": "cp-0084b4a7",
+      "title": "10-minute balance routine",
+      "description": "Gentle balance and stretching exercises to reduce fall risk.",
+      "category": "exercise",
+      "status": "active",
+      "assignedTo": "mark",
+      "createdBy": "Caregiver",
+      "scheduledTime": "Anytime",
+      "daysOfWeek": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+      ],
+      "completedToday": false
+    },
+    {
+      "id": "cp-0b53175f",
+      "title": "Breakfast",
+      "description": "Ensure Mark has breakfast",
+      "category": "nutrition",
+      "status": "active",
+      "assignedTo": "mark",
+      "createdBy": "Rocky AI",
+      "scheduledTime": "9:00 AM",
+      "daysOfWeek": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ],
+      "completedToday": false
+    }
+  ],
+  "wearableData": {
+    "device": "Apple Watch Series 9",
+    "lastSynced": "2026-06-10T15:39:24.108Z",
+    "connected": true,
+    "battery": 72,
+    "realtime": {
+      "heartRate": 72,
+      "spo2": 97,
+      "steps": 1840,
+      "calories": 420,
+      "activeMinutes": 28,
+      "standHours": 6
+    },
+    "hourlyHeartRate": [
+      {
+        "hour": "00:00",
+        "bpm": 65
+      },
+      {
+        "hour": "01:00",
+        "bpm": 62
+      },
+      {
+        "hour": "02:00",
+        "bpm": 61
+      },
+      {
+        "hour": "03:00",
+        "bpm": 63
+      },
+      {
+        "hour": "04:00",
+        "bpm": 61
+      },
+      {
+        "hour": "05:00",
+        "bpm": 63
+      },
+      {
+        "hour": "06:00",
+        "bpm": 78
+      },
+      {
+        "hour": "07:00",
+        "bpm": 79
+      },
+      {
+        "hour": "08:00",
+        "bpm": 66
+      },
+      {
+        "hour": "09:00",
+        "bpm": 68
+      },
+      {
+        "hour": "10:00",
+        "bpm": 69
+      },
+      {
+        "hour": "11:00",
+        "bpm": 68
+      },
+      {
+        "hour": "12:00",
+        "bpm": 86
+      },
+      {
+        "hour": "13:00",
+        "bpm": 74
+      },
+      {
+        "hour": "14:00",
+        "bpm": 83
+      },
+      {
+        "hour": "15:00",
+        "bpm": 69
+      },
+      {
+        "hour": "16:00",
+        "bpm": 74
+      },
+      {
+        "hour": "17:00",
+        "bpm": 87
+      },
+      {
+        "hour": "18:00",
+        "bpm": 65
+      },
+      {
+        "hour": "19:00",
+        "bpm": 60
+      },
+      {
+        "hour": "20:00",
+        "bpm": 67
+      },
+      {
+        "hour": "21:00",
+        "bpm": 72
+      },
+      {
+        "hour": "22:00",
+        "bpm": 63
+      },
+      {
+        "hour": "23:00",
+        "bpm": 71
+      }
+    ],
+    "sleepStages": [
+      {
+        "stage": "Awake",
+        "duration": 12,
+        "percentage": 3
+      },
+      {
+        "stage": "REM",
+        "duration": 98,
+        "percentage": 23
+      },
+      {
+        "stage": "Light",
+        "duration": 186,
+        "percentage": 43
+      },
+      {
+        "stage": "Deep",
+        "duration": 136,
+        "percentage": 31
+      }
+    ]
+  },
+  "settings": {
+    "notifications": {
+      "pushEnabled": true,
+      "emailDigest": true,
+      "smsAlerts": true,
+      "alertSeverityThreshold": "info",
+      "quietHours": {
+        "enabled": true,
+        "start": "22:00",
+        "end": "07:00"
+      }
+    },
+    "display": {
+      "theme": "light",
+      "compactMode": false,
+      "showWearableCard": true,
+      "dashboardLayout": "standard"
+    },
+    "privacy": {
+      "shareWithProvider": true,
+      "anonymizeExports": false,
+      "dataRetentionDays": 365
+    },
+    "voiceCheckin": {
+      "enabled": true,
+      "defaultTime": "09:30",
+      "reminderMinutesBefore": 15,
+      "autoTranscribe": true,
+      "language": "en-US"
+    }
+  },
+  "patients": [
+    {
+      "id": "patient-1",
+      "name": "Eleanor M.",
+      "age": 82,
+      "image": "https://images.unsplash.com/photo-1581579438747-104c53e7a78e?w=120&h=120&fit=crop&auto=format",
+      "wellnessScore": 86,
+      "weeklyChange": "+4 vs last wk",
+      "summary": "Eleanor slept well, took morning meds, and walked 1,840 steps. Mood trending warm.",
+      "stats": {
+        "meds": {
+          "value": "2 / 5",
+          "hint": "1 pending 2:00 PM",
+          "tone": "amber"
+        },
+        "sleep": {
+          "value": "7h 12m",
+          "hint": "Restful",
+          "tone": "indigo"
+        },
+        "mood": {
+          "value": "Warm",
+          "hint": "↑ 12% wk",
+          "tone": "emerald"
+        }
+      },
+      "details": {
+        "sleepQuality": "Excellent",
+        "sleepDuration": "7h 12m",
+        "sleepTone": "emerald",
+        "hydration": "Below goal",
+        "hydrationValue": "4 / 8 cups",
+        "hydrationTone": "amber",
+        "steps": "On track",
+        "stepsValue": "1,840",
+        "stepsTone": "indigo"
+      },
+      "summaryStatus": {
+        "acknowledged": false,
+        "time": "9:42 AM",
+        "text": "Eleanor's voice tone is steady and her morning routine is on track. She mentioned slight knee stiffness — I've suggested a gentle stretch and flagged it for Dr. Chen's Friday call."
+      },
+      "alerts": [
+        {
+          "id": "alert-1",
+          "sev": "warn",
+          "t": "Fall risk: moderate",
+          "d": "Slower gait pattern over 3 days. Suggested: balance routine + remove hallway rug.",
+          "c": "amber",
+          "resolved": false,
+          "createdAt": "2026-06-09T07:30:00Z"
+        },
+        {
+          "id": "alert-2",
+          "sev": "info",
+          "t": "Med reminder: Lisinopril",
+          "d": "Pending 2:00 PM",
+          "c": "indigo",
+          "resolved": false,
+          "createdAt": "2026-06-09T08:00:00Z"
+        },
+        {
+          "id": "alert-3",
+          "sev": "good",
+          "t": "Mood improved 18%",
+          "d": "Compared to last week",
+          "c": "emerald",
+          "resolved": false,
+          "createdAt": "2026-06-09T09:00:00Z"
+        }
+      ],
+      "medications": [
+        {
+          "id": "med-1",
+          "name": "Aspirin (81mg)",
+          "time": "8:00 AM",
+          "taken": true,
+          "dosage": "81mg",
+          "frequency": "daily",
+          "prescriber": "Dr. Chen",
+          "notes": "Take with food"
+        },
+        {
+          "id": "med-2",
+          "name": "Multivitamin",
+          "time": "8:00 AM",
+          "taken": true,
+          "dosage": "1 tablet",
+          "frequency": "daily",
+          "prescriber": "Self",
+          "notes": ""
+        },
+        {
+          "id": "med-3",
+          "name": "Lisinopril (10mg)",
+          "time": "2:00 PM",
+          "taken": false,
+          "dosage": "10mg",
+          "frequency": "daily",
+          "prescriber": "Dr. Chen",
+          "notes": "Monitor blood pressure"
+        },
+        {
+          "id": "med-4",
+          "name": "Melatonin (3mg)",
+          "time": "9:00 PM",
+          "taken": false,
+          "dosage": "3mg",
+          "frequency": "daily",
+          "prescriber": "Self",
+          "notes": "For sleep support"
+        },
+        {
+          "id": "med-c00bd64f",
+          "name": "Monticope",
+          "time": "9:00 AM",
+          "taken": false,
+          "dosage": "1 tablet",
+          "frequency": "daily",
+          "prescriber": "Rocky AI",
+          "notes": ""
+        }
+      ],
+      "timeline": [
+        {
+          "id": "t-1781112988812",
+          "time": "11:06 PM",
+          "title": "Lisinopril (10mg) marked as pending",
+          "desc": "Updated by Caregiver.",
+          "type": "med"
+        },
+        {
+          "id": "t-1781112987691",
+          "time": "11:06 PM",
+          "title": "Lisinopril (10mg) marked as taken",
+          "desc": "Updated by Caregiver.",
+          "type": "med"
+        },
+        {
+          "id": "t-1781112983813",
+          "time": "11:06 PM",
+          "title": "Lisinopril (10mg) marked as pending",
+          "desc": "Updated by Caregiver.",
+          "type": "med"
+        },
+        {
+          "id": "t-1781112982519",
+          "time": "11:06 PM",
+          "title": "Lisinopril (10mg) marked as taken",
+          "desc": "Updated by Caregiver.",
+          "type": "med"
+        },
+        {
+          "id": "t-1781112857007",
+          "time": "11:04 PM",
+          "title": "New medication scheduled: Monticope",
+          "desc": "1 tablet — Scheduled for 9:00 AM daily.",
+          "type": "med"
+        },
+        {
+          "id": "t-1",
+          "time": "9:42 AM",
+          "title": "Daily voice check-in completed",
+          "desc": "Eleanor reports slight knee stiffness, otherwise positive mood.",
+          "type": "voice"
+        },
+        {
+          "id": "t-2",
+          "time": "8:30 AM",
+          "title": "Morning medication taken",
+          "desc": "Aspirin and Multivitamin checked off.",
+          "type": "med"
+        },
+        {
+          "id": "t-3",
+          "time": "7:12 AM",
+          "title": "Sleep telemetry synced",
+          "desc": "7h 12m of restful sleep recorded via wearable.",
+          "type": "sensor"
+        },
+        {
+          "id": "t-4",
+          "time": "Yesterday",
+          "title": "Respite session scheduled",
+          "desc": "Respite caregiver Jane scheduled for Thursday.",
+          "type": "team"
+        }
+      ]
+    },
+    {
+      "id": "patient-5d17a448",
+      "name": "mark",
+      "age": 89,
+      "image": "https://ui-avatars.com/api/?name=mark&background=6366f1&color=fff&size=120",
+      "wellnessScore": 50,
+      "weeklyChange": "New patient",
+      "summary": "mark was just added to Rocky. Set up their daily routine, medications, and care team to get started.",
+      "stats": {
+        "meds": {
+          "value": "0 / 3",
+          "hint": "1 pending 8:00 AM",
+          "tone": "amber"
+        },
+        "sleep": {
+          "value": "—",
+          "hint": "No data",
+          "tone": "indigo"
+        },
+        "mood": {
+          "value": "—",
+          "hint": "No data",
+          "tone": "indigo"
+        }
+      },
+      "details": {
+        "sleepQuality": "—",
+        "sleepDuration": "—",
+        "sleepTone": "indigo",
+        "hydration": "—",
+        "hydrationValue": "— / 8 cups",
+        "hydrationTone": "indigo",
+        "steps": "—",
+        "stepsValue": "0",
+        "stepsTone": "indigo"
+      },
+      "summaryStatus": {
+        "acknowledged": false,
+        "time": "10:03 PM",
+        "text": "Welcome mark to Rocky Care. Configure their profile, medications, and care team to begin monitoring."
+      },
+      "alerts": [],
+      "medications": [
+        {
+          "id": "med-ef9da27c",
+          "name": "vitamin d3",
+          "time": "8:00 AM",
+          "taken": false,
+          "dosage": "",
+          "frequency": "daily",
+          "prescriber": "Self",
+          "notes": ""
+        },
+        {
+          "id": "med-9a2ace3c",
+          "name": "dolo",
+          "time": "11:00 AM",
+          "taken": false,
+          "dosage": "",
+          "frequency": "daily",
+          "prescriber": "Self",
+          "notes": ""
+        },
+        {
+          "id": "med-49f0b0f8",
+          "name": "Calpol 500mg",
+          "time": "10:00 PM",
+          "taken": false,
+          "dosage": "1 tablet",
+          "frequency": "daily",
+          "prescriber": "Rocky AI",
+          "notes": ""
+        }
+      ],
+      "timeline": [
+        {
+          "id": "t-1781110157154",
+          "time": "10:19 PM",
+          "title": "New medication scheduled: Calpol 500mg",
+          "desc": "1 tablet — Scheduled for 10:00 PM daily.",
+          "type": "med"
+        },
+        {
+          "id": "t-1781109502285",
+          "time": "10:08 PM",
+          "title": "New medication added: dolo",
+          "desc": "Scheduled for 11:00 AM daily.",
+          "type": "med"
+        },
+        {
+          "id": "t-1781109408679",
+          "time": "10:06 PM",
+          "title": "Scheduled: Breakfast",
+          "desc": "Created by Rocky AI for 9:00 AM.",
+          "type": "plan"
+        },
+        {
+          "id": "t-1781109318949",
+          "time": "10:05 PM",
+          "title": "New care plan: 10-minute balance routine",
+          "desc": "Created by Caregiver.",
+          "type": "plan"
+        },
+        {
+          "id": "t-1781109308940",
+          "time": "10:05 PM",
+          "title": "Scheduled: Bedtime routine",
+          "desc": "Created by Rocky AI for 10:00 PM.",
+          "type": "plan"
+        },
+        {
+          "id": "t-1781109239000",
+          "time": "10:03 PM",
+          "title": "New medication added: vitamin d3",
+          "desc": "Scheduled for 8:00 AM daily.",
+          "type": "med"
+        },
+        {
+          "id": "t-1781109213706",
+          "time": "10:03 PM",
+          "title": "mark added to Rocky Care",
+          "desc": "Condition: dimentia. New patient profile created.",
+          "type": "note"
+        }
+      ]
+    }
+  ],
+  "chatHistory": {
+    "test-session": [
+      {
+        "role": "user",
+        "content": "Hello! Is Eleanor doing well?",
+        "timestamp": "2026-06-10T16:27:24.997Z"
+      },
+      {
+        "role": "rocky",
+        "content": "Hello! Yes, Eleanor is doing quite well today 💚 Her wellness score is up, she slept excellently for over 7 hours, and her mood is trending warm.\n\nJust a couple of gentle reminders: she's a little behind on her hydration goal, so encouraging some water would be helpful, and her Lisinopril is still pending from 2:00 PM.",
+        "timestamp": "2026-06-10T16:27:28.730Z"
+      }
+    ],
+    "default": [
+      {
+        "role": "user",
+        "content": "schedule sleep time at 10pm for mark",
+        "timestamp": "2026-06-10T16:35:05.079Z"
+      },
+      {
+        "role": "rocky",
+        "content": "Of course, Sarah. I’ve scheduled a bedtime routine for Mark at 10:00 PM to help him get settled. \n\nIt’s great that you’re prioritizing his rest—don't forget to take a moment for yourself tonight, too. You're doing a wonderful job looking after him! 💚",
+        "timestamp": "2026-06-10T16:35:09.864Z"
+      },
+      {
+        "role": "user",
+        "content": "set breakfast time for mark at 9am",
+        "timestamp": "2026-06-10T16:36:46.493Z"
+      },
+      {
+        "role": "rocky",
+        "content": "That's a great idea, Sarah! I've scheduled breakfast for Mark at 9:00 AM. Ensuring he has a consistent routine will be very helpful.\n\nRemember to take a moment for your own meals today too, you deserve it! 💚",
+        "timestamp": "2026-06-10T16:36:51.316Z"
+      },
+      {
+        "role": "user",
+        "content": "in medication add dolo 650 tablet to mark at 11am",
+        "timestamp": "2026-06-10T16:37:41.925Z"
+      },
+      {
+        "role": "rocky",
+        "content": "I can help you schedule reminders for Mark's medications, but I can't directly add new medications to his profile through this conversation.\n\nTo add \"dolo 650 tablet\" at 11:00 AM, you can usually do this in Mark's profile settings, often under a \"medications\" or \"care plan\" section. This ensures it's properly logged and tracked. Would you like me to schedule a reminder for it at 11 AM, or would you prefer to add it to his profile first?",
+        "timestamp": "2026-06-10T16:37:44.791Z"
+      },
+      {
+        "role": "user",
+        "content": "add medication monticope 9am for eleanor",
+        "timestamp": "2026-06-10T17:33:14.948Z"
+      },
+      {
+        "role": "rocky",
+        "content": "It sounds like you're working hard to keep everyone’s medications on track, Sarah! \n\nJust a gentle reminder that my current data is for Mark, so I don't have a profile for Eleanor set up. If you'd like to manage her care as well, we can certainly get her added to your dashboard. \n\nWould you like me to help you set her up, or is there anything else I can help you with for Mark tonight? 💚",
+        "timestamp": "2026-06-10T17:33:17.294Z"
+      },
+      {
+        "role": "user",
+        "content": "add medication monticope tablet 9am for eleanor",
+        "timestamp": "2026-06-10T17:34:15.590Z"
+      },
+      {
+        "role": "rocky",
+        "content": "I’ve successfully scheduled the Monticope (1 tablet) for Eleanor at 9:00 AM. \n\nYou are doing a fantastic job keeping on top of all these details for both of them, Sarah. Please make sure you find a little time to rest tonight—you've been working so hard today! 💚",
+        "timestamp": "2026-06-10T17:34:18.208Z"
+      }
+    ],
+    "test-session-tool": [
+      {
+        "role": "user",
+        "content": "Rocky, please schedule a new medication: 1 tablet of Calpol 500mg at 10:00 PM daily.",
+        "timestamp": "2026-06-10T16:49:15.386Z"
+      },
+      {
+        "role": "rocky",
+        "content": "I've successfully scheduled the Calpol 500mg for 10:00 PM daily. You're doing a great job setting up Mark's care routine tonight—it’s a big task, and your dedication is clear. 💚 How are you holding up with all these updates?",
+        "timestamp": "2026-06-10T16:49:18.036Z"
+      }
+    ]
+  }
+}
