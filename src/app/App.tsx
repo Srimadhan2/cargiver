@@ -3013,9 +3013,8 @@ export default function App() {
             const isActive = page === item.label;
             return (
               <button key={item.label} onClick={() => { setPage(item.label); setShowPatientSelector(false); }}
-                className={`w-full flex items-center gap-3 px-2 py-2 rounded-xl cursor-pointer transition text-left ${isActive ? "bg-zinc-500/10 backdrop-blur-sm text-foreground shadow-sm" : "hover:bg-card/70 text-foreground"
-                  }`}>
-                <div className={`size-11 rounded-full flex items-center justify-center shrink-0 ${isActive ? "bg-zinc-500/15 border border-zinc-400/20 text-foreground" : "bg-card border border-border text-muted-foreground"}`}>
+                className={`w-full flex items-center gap-3 px-2 py-2 rounded-xl cursor-pointer transition text-left ${isActive ? "bg-white/10 backdrop-blur-sm text-foreground shadow-[0_0_0_1px_rgba(255,255,255,0.08)]" : "hover:bg-white/5 text-foreground"}`}>
+                <div className={`size-11 rounded-full flex items-center justify-center shrink-0 ${isActive ? "bg-white/10 border border-white/15 text-foreground" : "bg-card border border-border text-muted-foreground"}`}>
                   <item.icon className="size-5" />
                 </div>
                 <div className="flex-1 min-w-0 border-b border-transparent py-2">
