@@ -28,7 +28,7 @@ export default function Login({ onSwitchToSignup, onDevLogin }: LoginProps) {
     }
 
     try {
-      onDevLogin?.();
+      setError("Use the bypass login button for demo access.");
     } catch {
       setError("Unable to proceed right now. Please try again.");
     } finally {

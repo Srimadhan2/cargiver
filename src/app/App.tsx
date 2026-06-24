@@ -2738,7 +2738,7 @@ export default function App() {
     let isMounted = true;
 
     if (!isSupabaseConfigured) {
-      applyDevSession();
+      setAuthReady(true);
       return () => {
         isMounted = false;
       };

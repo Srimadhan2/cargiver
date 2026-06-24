@@ -43,8 +43,8 @@ export default function Signup({ onSwitchToLogin, onDevLogin }: SignupProps) {
     setIsSubmitting(true);
 
     try {
-      onDevLogin?.();
-      setMessage("Using demo access for now.");
+      setError("Use the bypass login button for demo access.");
+      setMessage("");
     } catch {
       setError("Unable to proceed right now. Please try again.");
     } finally {
