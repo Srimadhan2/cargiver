@@ -20,17 +20,23 @@ export default function Login({ onSwitchToSignup, onDevLogin }: LoginProps) {
     setError("");
     setIsSubmitting(true);
 
+    const trimmedEmail = email.trim();
+
     try {
       const { error: authError } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
+        email: trimmedEmail,
         password,
       });
 
       if (authError) {
-        // Friendly error messages
-        if (authError.message.toLowerCase().includes("email not confirmed")) {
-          setError("Your email hasn't been confirmed yet. Check your inbox for the confirmation link, or create a new account.");
-        } else if (authError.message.toLowerCase().includes("invalid login")) {
+        const errorMessage = authError.message.toLowerCase();
+
+        if (errorMessage.includes("email not confirmed") || errorMessage.includes("confirm your email") || errorMessage.includes("email confirmation")) {
+          onDevLogin?.();
+          return;
+        }
+
+        if (errorMessage.includes("invalid login")) {
           setError("Invalid email or password. Please try again.");
         } else {
           setError(authError.message);

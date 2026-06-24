@@ -278,6 +278,15 @@ const DashboardView = ({
   // Risk calculation
   const hasWarnOrCritical = activeAlerts.some((a: any) => a.sev === 'warn' || a.sev === 'critical');
   const riskLevel = activeAlerts.length === 0 ? 'green' : hasWarnOrCritical ? 'red' : 'yellow';
+  const wellnessScoreValue = patient?.wellnessScore ?? 0;
+  const wellnessTone = wellnessScoreValue >= 80 ? 'green' : wellnessScoreValue >= 60 ? 'amber' : 'red';
+  const wellnessTextClass = wellnessTone === 'green' ? 'text-emerald-soft' : wellnessTone === 'amber' ? 'text-amber-400' : 'text-red-400';
+  const wellnessCircleClass = wellnessTone === 'green' ? 'text-emerald-soft' : wellnessTone === 'amber' ? 'text-amber-400' : 'text-red-400';
+  const wellnessGradientStops = wellnessTone === 'green'
+    ? { start: '#a7f3d0', end: '#34d399' }
+    : wellnessTone === 'amber'
+      ? { start: '#fde68a', end: '#f59e0b' }
+      : { start: '#fecaca', end: '#ef4444' };
 
   const completedPlansCount = plans.filter(p => p.completedToday).length;
   const totalPlansCount = plans.length;
@@ -332,68 +341,68 @@ const DashboardView = ({
         {/* Main content */}
         <div className="lg:col-span-2 space-y-4">
           {/* Wellness Score + Summary */}
-          <div className="rounded-[22px] rounded-br-sm bg-primary border-none p-5 text-foreground relative overflow-hidden">
-            <div className="absolute -right-10 -top-10 size-48 rounded-full bg-emerald/30 blur-3xl" />
+          <div className="rounded-[22px] rounded-br-sm bg-card border border-border/70 p-5 text-foreground relative overflow-hidden shadow-sm">
+            <div className="absolute -right-10 -top-10 size-48 rounded-full bg-muted/60 blur-3xl" />
             <div className="flex items-start justify-between relative">
               <div>
                 <div className="text-[11px] tracking-[0.18em] uppercase text-muted-foreground font-mono">Wellness score</div>
                 <div className="mt-1 flex items-baseline gap-2">
-                  <span className="font-serif text-[56px] leading-none">{patient?.wellnessScore ?? "—"}</span>
-                  <span className="text-emerald-soft text-sm flex items-center gap-1"><ArrowUpRight className="size-3.5" /> {patient?.weeklyChange || ""}</span>
+                  <span className={`font-serif text-[56px] leading-none ${wellnessTextClass}`}>{patient?.wellnessScore ?? "—"}</span>
+                  <span className={`text-sm flex items-center gap-1 ${wellnessTextClass}`}><ArrowUpRight className="size-3.5" /> {patient?.weeklyChange || ""}</span>
                 </div>
                 <div className="mt-2 text-sm text-muted-foreground max-w-[300px]">{patient?.summary || ""}</div>
               </div>
               <div className="relative size-20 grid place-items-center">
                 <svg className="absolute inset-0 -rotate-90" viewBox="0 0 80 80">
                   <circle cx="40" cy="40" r="34" stroke="rgba(255,255,255,0.15)" strokeWidth="6" fill="none" />
-                  <circle cx="40" cy="40" r="34" stroke="url(#g1)" strokeWidth="6" fill="none"
+                  <circle cx="40" cy="40" r="34" stroke={`url(#g1-${wellnessTone})`} strokeWidth="6" fill="none"
                     strokeDasharray={`${((patient?.wellnessScore ?? 0) / 100) * 213.6} 213.6`} strokeLinecap="round" />
                   <defs>
-                    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#a7f3d0" /><stop offset="100%" stopColor="#67e8f9" />
+                    <linearGradient id={`g1-${wellnessTone}`} x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor={wellnessGradientStops.start} /><stop offset="100%" stopColor={wellnessGradientStops.end} />
                     </linearGradient>
                   </defs>
                 </svg>
-                <Heart className="size-6 text-emerald-soft" fill="currentColor" />
+                <Heart className={`size-6 ${wellnessCircleClass}`} fill="currentColor" />
               </div>
             </div>
           </div>
 
           {/* Daily Care Summary Grid */}
           <div className="space-y-2">
-            <div className="text-xs text-muted-foreground font-mono uppercase tracking-widest">Daily Care Summary</div>
+            <div className="text-xs text-foreground/80 font-mono uppercase tracking-widest">Daily Care Summary</div>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
-              <div className="rounded-xl bg-[#3a3a3c] border-none p-3 text-center font-sans">
-                <MoonStar className="size-4 text-indigo-soft mx-auto mb-1.5" />
-                <div className="text-[9px] text-muted-foreground uppercase font-mono">Sleep</div>
-                <div className="text-xs text-foreground font-semibold mt-0.5 truncate">{patient?.details?.sleepDuration || "—"}</div>
-                <div className="text-[9px] text-muted-foreground truncate mt-0.5">{patient?.details?.sleepQuality || "No data"}</div>
+              <div className="rounded-2xl bg-card border border-border/80 p-3 text-center font-sans shadow-sm">
+                <MoonStar className="size-4 text-violet-500 mx-auto mb-1.5" />
+                <div className="text-[9px] text-slate-600 dark:text-slate-300 uppercase font-mono font-semibold">Sleep</div>
+                <div className="text-sm text-foreground font-semibold mt-0.5 truncate">{patient?.details?.sleepDuration || "—"}</div>
+                <div className="text-[10px] text-slate-700 dark:text-slate-300 truncate mt-0.5">{patient?.details?.sleepQuality || "No data"}</div>
               </div>
-              <div className="rounded-xl bg-[#3a3a3c] border-none p-3 text-center font-sans">
+              <div className="rounded-2xl bg-card border border-border/80 p-3 text-center font-sans shadow-sm">
                 <Activity className="size-4 text-emerald-soft mx-auto mb-1.5" />
-                <div className="text-[9px] text-muted-foreground uppercase font-mono">Mood</div>
-                <div className="text-xs text-foreground font-semibold mt-0.5 truncate">{patient?.stats?.mood?.value || "—"}</div>
-                <div className="text-[9px] text-muted-foreground truncate mt-0.5">{patient?.stats?.mood?.hint || "Stable"}</div>
+                <div className="text-[9px] text-slate-600 dark:text-slate-300 uppercase font-mono font-semibold">Mood</div>
+                <div className="text-sm text-foreground font-semibold mt-0.5 truncate">{patient?.stats?.mood?.value || "—"}</div>
+                <div className="text-[10px] text-slate-700 dark:text-slate-300 truncate mt-0.5">{patient?.stats?.mood?.hint || "Stable"}</div>
               </div>
-              <div className="rounded-xl bg-[#3a3a3c] border-none p-3 text-center font-sans">
-                <Pill className="size-4 text-indigo-soft mx-auto mb-1.5" />
-                <div className="text-[9px] text-muted-foreground uppercase font-mono">Medication</div>
-                <div className="text-xs text-foreground font-semibold mt-0.5 truncate">{patient?.stats?.meds?.value || "—"}</div>
-                <div className="text-[9px] text-muted-foreground truncate mt-0.5">{patient?.stats?.meds?.hint || "Pending"}</div>
+              <div className="rounded-2xl bg-card border border-border/80 p-3 text-center font-sans shadow-sm">
+                <Pill className="size-4 text-indigo mx-auto mb-1.5" />
+                <div className="text-[9px] text-slate-600 dark:text-slate-300 uppercase font-mono font-semibold">Medication</div>
+                <div className="text-sm text-foreground font-semibold mt-0.5 truncate">{patient?.stats?.meds?.value || "—"}</div>
+                <div className="text-[10px] text-slate-700 dark:text-slate-300 truncate mt-0.5">{patient?.stats?.meds?.hint || "Pending"}</div>
               </div>
-              <div className="rounded-xl bg-[#3a3a3c] border-none p-3 text-center font-sans">
+              <div className="rounded-2xl bg-card border border-border/80 p-3 text-center font-sans shadow-sm">
                 <GlassWater className="size-4 text-emerald-soft mx-auto mb-1.5" />
-                <div className="text-[9px] text-muted-foreground uppercase font-mono">Hydration</div>
-                <div className="text-xs text-foreground font-semibold mt-0.5 truncate">{waterIntakeCups} / 8 cups</div>
-                <div className={`text-[9px] font-medium truncate mt-0.5 ${waterIntakeCups >= 6 ? "text-emerald-soft" : "text-warm"}`}>
+                <div className="text-[9px] text-slate-600 dark:text-slate-300 uppercase font-mono font-semibold">Hydration</div>
+                <div className="text-sm text-foreground font-semibold mt-0.5 truncate">{waterIntakeCups} / 8 cups</div>
+                <div className={`text-[10px] font-semibold truncate mt-0.5 ${waterIntakeCups >= 6 ? "text-emerald-soft" : "text-warm"}`}>
                   {waterIntakeCups >= 8 ? "Goal Met" : "Below Goal"}
                 </div>
               </div>
-              <div className="rounded-xl bg-[#3a3a3c] border-none p-3 text-center font-sans col-span-2 sm:col-span-1">
-                <CheckCircle className="size-4 text-indigo-soft mx-auto mb-1.5" />
-                <div className="text-[9px] text-muted-foreground uppercase font-mono">Care Plan</div>
-                <div className="text-xs text-foreground font-semibold mt-0.5 truncate">{plansText}</div>
-                <div className="text-[9px] text-muted-foreground truncate mt-0.5">{totalPlansCount > 0 ? `${Math.round((completedPlansCount / totalPlansCount) * 100)}% Rate` : "Inactive"}</div>
+              <div className="rounded-2xl bg-card border border-border/80 p-3 text-center font-sans shadow-sm col-span-2 sm:col-span-1">
+                <CheckCircle className="size-4 text-violet-500 mx-auto mb-1.5" />
+                <div className="text-[9px] text-slate-600 dark:text-slate-300 uppercase font-mono font-semibold">Care Plan</div>
+                <div className="text-sm text-foreground font-semibold mt-0.5 truncate">{plansText}</div>
+                <div className="text-[10px] text-slate-700 dark:text-slate-300 truncate mt-0.5">{totalPlansCount > 0 ? `${Math.round((completedPlansCount / totalPlansCount) * 100)}% Rate` : "Inactive"}</div>
               </div>
             </div>
           </div>
@@ -2668,6 +2677,7 @@ export default function App() {
   const [authView, setAuthView] = useState<"login" | "signup">("login");
   const [token, setToken] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [page, setPage] = useState("Dashboard");
   const [patient, setPatient] = useState<any>(null);
   const [patientsList, setPatientsList] = useState<any[]>([]);
@@ -2875,6 +2885,21 @@ export default function App() {
 
 
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const preferredTheme = savedTheme === "dark" || savedTheme === "light"
+      ? savedTheme
+      : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+    setTheme(preferredTheme);
+    document.documentElement.classList.toggle("dark", preferredTheme === "dark");
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
+
   const navItems = [
     { icon: Home, label: "Dashboard" },
     { icon: Mic, label: "Voice Check-In" },
@@ -2930,9 +2955,18 @@ export default function App() {
           <button className="text-primary font-semibold text-[17px] cursor-pointer flex items-center gap-0.5" onClick={() => setShowPatientSelector(!showPatientSelector)}>
             Patients <ChevronRight className={`size-4 transition-transform ${showPatientSelector ? "rotate-90" : ""}`} />
           </button>
-          <button className="text-primary cursor-pointer" onClick={() => setShowAddPatientModal(true)}>
-            <Edit3 className="size-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              className="text-primary cursor-pointer rounded-full border border-border bg-card/80 p-2 transition hover:bg-muted/70"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              {theme === "dark" ? <Sun className="size-4" /> : <MoonStar className="size-4" />}
+            </button>
+            <button className="text-primary cursor-pointer" onClick={() => setShowAddPatientModal(true)}>
+              <Edit3 className="size-5" />
+            </button>
+          </div>
         </div>
 
         {/* Patient Selector Dropdown */}
@@ -2959,9 +2993,9 @@ export default function App() {
             const isActive = page === item.label;
             return (
               <button key={item.label} onClick={() => { setPage(item.label); setShowPatientSelector(false); }}
-                className={`w-full flex items-center gap-3 px-2 py-2 rounded-xl cursor-pointer transition text-left ${isActive ? "bg-primary text-foreground" : "hover:bg-card text-foreground"
+                className={`w-full flex items-center gap-3 px-2 py-2 rounded-xl cursor-pointer transition text-left ${isActive ? "bg-zinc-500/10 backdrop-blur-sm text-foreground shadow-sm" : "hover:bg-card/70 text-foreground"
                   }`}>
-                <div className={`size-11 rounded-full flex items-center justify-center shrink-0 ${isActive ? "bg-white/20" : "bg-card border border-border text-muted-foreground"}`}>
+                <div className={`size-11 rounded-full flex items-center justify-center shrink-0 ${isActive ? "bg-zinc-500/15 border border-zinc-400/20 text-foreground" : "bg-card border border-border text-muted-foreground"}`}>
                   <item.icon className="size-5" />
                 </div>
                 <div className="flex-1 min-w-0 border-b border-transparent py-2">

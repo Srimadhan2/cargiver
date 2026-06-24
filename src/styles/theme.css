@@ -7,42 +7,42 @@
   --font-mono: "SF Mono", Menlo, monospace;
 
   /* Apple Light Mode System Colors */
-  --background: #ffffff;
-  --foreground: #000000;
-  --card: #f2f2f7;
-  --card-foreground: #000000;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
   --popover: #ffffff;
-  --popover-foreground: #000000;
-  --primary: #0a84ff; /* Apple Blue */
+  --popover-foreground: #0f172a;
+  --primary: #2563eb; /* Accessible blue */
   --primary-foreground: #ffffff;
-  --secondary: #e5e5ea; /* Apple Gray */
-  --secondary-foreground: #000000;
-  --muted: #f2f2f7;
-  --muted-foreground: #8e8e93; /* System Gray */
-  --accent: #30d158; /* Apple Green */
+  --secondary: #e2e8f0; /* Soft slate */
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #475569; /* Stronger gray */
+  --accent: #16a34a; /* Fresh green */
   --accent-foreground: #ffffff;
-  --destructive: #ff453a;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
-  --input: rgba(0, 0, 0, 0.05);
-  --input-background: rgba(0, 0, 0, 0.05);
-  --switch-background: #e5e5ea;
+  --border: rgba(15, 23, 42, 0.12);
+  --input: rgba(15, 23, 42, 0.08);
+  --input-background: rgba(15, 23, 42, 0.06);
+  --switch-background: #cbd5e1;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: #0a84ff;
 
   /* Apple-specific tokens for backward compatibility if used */
-  --indigo-deep: #000000;
-  --indigo: #0a84ff;
-  --indigo-soft: #8e8e93;
-  --sky: #5ac8fa;
-  --emerald: #30d158;
-  --emerald-soft: #34c759;
-  --lavender: #af52de;
-  --cyan-glow: #32ade6;
-  --warm: #ff9500;
-  --alert: #ff3b30;
-  --frost: #f2f2f7;
+  --indigo-deep: #0f172a;
+  --indigo: #2563eb;
+  --indigo-soft: #475569;
+  --sky: #0284c7;
+  --emerald: #16a34a;
+  --emerald-soft: #15803d;
+  --lavender: #7c3aed;
+  --cyan-glow: #0891b2;
+  --warm: #d97706;
+  --alert: #dc2626;
+  --frost: #f8fafc;
 
   --chart-1: #0a84ff;
   --chart-2: #30d158;
@@ -63,25 +63,25 @@
 
 .dark {
   /* Apple Dark Mode System Colors */
-  --background: #000000;
-  --foreground: #ffffff;
-  --card: #1c1c1e; /* Apple Panel */
-  --card-foreground: #ffffff;
-  --popover: #1c1c1e;
-  --popover-foreground: #ffffff;
-  --primary: #0a84ff; /* Apple Blue remains consistent or slightly lighter */
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: #111827;
+  --card-foreground: #f8fafc;
+  --popover: #111827;
+  --popover-foreground: #f8fafc;
+  --primary: #3b82f6; /* Brighter blue for dark mode */
   --primary-foreground: #ffffff;
-  --secondary: #2c2c2e; /* Darker gray for bubbles/cards */
-  --secondary-foreground: #ffffff;
-  --muted: #1c1c1e;
-  --muted-foreground: #8e8e93; /* System Gray */
-  --accent: #30d158;
+  --secondary: #1f2937;
+  --secondary-foreground: #f8fafc;
+  --muted: #111827;
+  --muted-foreground: #cbd5e1;
+  --accent: #22c55e;
   --accent-foreground: #ffffff;
-  --destructive: #ff453a;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.1);
-  --ring: #0a84ff;
+  --border: rgba(248, 250, 252, 0.14);
+  --input: rgba(248, 250, 252, 0.12);
+  --ring: #60a5fa;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --chart-1: #0a84ff;

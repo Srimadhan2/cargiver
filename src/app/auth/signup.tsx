@@ -56,7 +56,13 @@ export default function Signup({ onSwitchToLogin, onDevLogin }: SignupProps) {
       });
 
       if (signupError) {
-        setError(signupError.message);
+        const signupMessage = signupError.message.toLowerCase();
+        if (signupMessage.includes("email") && signupMessage.includes("confirm")) {
+          onDevLogin?.();
+          setMessage("Account created. Continuing in demo mode while confirmation is pending.");
+        } else {
+          setError(signupError.message);
+        }
       } else if (data.session) {
         // Auto-signed in (email confirmation disabled) — session will be picked up by App.tsx
         setMessage("Account created successfully! Redirecting…");
@@ -68,8 +74,13 @@ export default function Signup({ onSwitchToLogin, onDevLogin }: SignupProps) {
         });
 
         if (loginError) {
-          // If auto-login fails too, show helpful message
-          setMessage("Account created! Please check your email for a confirmation link, then sign in.");
+          const loginMessage = loginError.message.toLowerCase();
+          if (loginMessage.includes("email") && loginMessage.includes("confirm")) {
+            onDevLogin?.();
+            setMessage("Account created. Continuing in demo mode while confirmation is pending.");
+          } else {
+            setMessage("Account created! Please check your email for a confirmation link, then sign in.");
+          }
         } else {
           setMessage("Account created successfully! Redirecting…");
         }

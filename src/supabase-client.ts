@@ -15,14 +15,20 @@ const fallbackAuth = {
 
 const createFallbackSupabase = () => ({ auth: fallbackAuth }) as any;
 
+const createSupabaseClient = () => {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return createFallbackSupabase();
+  }
+
+  return createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+      persistSession: true,
+    },
+  });
+};
+
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
-export const supabase = isSupabaseConfigured
-  ? createClient(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        autoRefreshToken: true,
-        detectSessionInUrl: true,
-        persistSession: true,
-      },
-    })
-  : createFallbackSupabase();
+export const supabase = createSupabaseClient();
