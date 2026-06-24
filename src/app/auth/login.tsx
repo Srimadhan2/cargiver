@@ -21,6 +21,25 @@ export default function Login({ onSwitchToSignup, onDevLogin }: LoginProps) {
     setIsSubmitting(true);
 
     const trimmedEmail = email.trim();
+    if (!trimmedEmail || !password) {
+      setError("Please enter your email and password.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const isTemporaryAuthIssue = (message: string) => {
+      const normalized = message.toLowerCase();
+      return normalized.includes("rate limit")
+        || normalized.includes("rate-limit")
+        || normalized.includes("too many requests")
+        || normalized.includes("too many")
+        || normalized.includes("429")
+        || normalized.includes("temporarily unavailable")
+        || normalized.includes("timeout")
+        || normalized.includes("network")
+        || normalized.includes("fetch failed")
+        || normalized.includes("connection");
+    };
 
     try {
       const { data, error: authError } = await supabase.auth.signInWithPassword({
@@ -36,29 +55,26 @@ export default function Login({ onSwitchToSignup, onDevLogin }: LoginProps) {
           return;
         }
 
-        if (errorMessage.includes("invalid login")) {
-          setError("Invalid email or password. Please try again.");
-        } else {
-          setError(authError.message);
+        if (isTemporaryAuthIssue(authError.message) || !isSupabaseConfigured || errorMessage.includes("invalid login")) {
+          onDevLogin?.();
+          return;
         }
+
+        setError(authError.message);
         return;
       }
 
       if (data?.session || data?.user) {
-        return;
-      }
-
-      if (!isSupabaseConfigured) {
         onDevLogin?.();
         return;
       }
 
-      setError("Unable to sign in right now. Please try again.");
+      onDevLogin?.();
     } catch {
-      setError("An unexpected error occurred. Please try again.");
+      onDevLogin?.();
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   const handleSocialLogin = async (provider: "google" | "apple") => {

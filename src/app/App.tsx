@@ -2717,6 +2717,7 @@ export default function App() {
     const mockUser = { id: "dev", name: "Demo User", email: "demo@example.com", role: "primary_caregiver", avatar: "https://ui-avatars.com/api/?name=Demo&background=0a84ff&color=fff" };
     localStorage.setItem("token", "dev_token");
     localStorage.setItem("user", JSON.stringify(mockUser));
+    setAuthReady(true);
     setToken("dev_token");
     setCurrentUser(mockUser);
   };
