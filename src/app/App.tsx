@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 import Login from "./auth/login";
 import Signup from "./auth/signup";
-import { supabase } from "../supabase-client";
+import { isSupabaseConfigured, supabase } from "../supabase-client";
 import { motion } from "motion/react";
 import {
   Activity, AlertTriangle, ArrowUpRight, Bell, Brain, Calendar,
@@ -2689,6 +2689,23 @@ export default function App() {
   const [newPatientNotes, setNewPatientNotes] = useState("");
   const [isSubmittingPatient, setIsSubmittingPatient] = useState(false);
 
+  const createDemoUser = () => ({
+    id: "dev",
+    name: "Demo User",
+    email: "demo@example.com",
+    role: "primary_caregiver",
+    avatar: "https://ui-avatars.com/api/?name=Demo&background=0a84ff&color=fff",
+  });
+
+  const applyDevSession = () => {
+    const mockUser = createDemoUser();
+    localStorage.setItem("token", "dev_token");
+    localStorage.setItem("user", JSON.stringify(mockUser));
+    setAuthReady(true);
+    setToken("dev_token");
+    setCurrentUser(mockUser);
+  };
+
   const applySession = (session: Session | null) => {
     if (!session?.user) {
       // Don't clear if using dev bypass
@@ -2714,16 +2731,18 @@ export default function App() {
   };
 
   const handleDevLogin = () => {
-    const mockUser = { id: "dev", name: "Demo User", email: "demo@example.com", role: "primary_caregiver", avatar: "https://ui-avatars.com/api/?name=Demo&background=0a84ff&color=fff" };
-    localStorage.setItem("token", "dev_token");
-    localStorage.setItem("user", JSON.stringify(mockUser));
-    setAuthReady(true);
-    setToken("dev_token");
-    setCurrentUser(mockUser);
+    applyDevSession();
   };
 
   useEffect(() => {
     let isMounted = true;
+
+    if (!isSupabaseConfigured) {
+      applyDevSession();
+      return () => {
+        isMounted = false;
+      };
+    }
 
     supabase.auth.getSession().then(({ data }) => {
       if (!isMounted) return;
