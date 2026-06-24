@@ -42,58 +42,11 @@ export default function Signup({ onSwitchToLogin, onDevLogin }: SignupProps) {
 
     setIsSubmitting(true);
 
-    const isTemporaryAuthIssue = (message: string) => {
-      const normalized = message.toLowerCase();
-      return normalized.includes("rate limit")
-        || normalized.includes("rate-limit")
-        || normalized.includes("too many requests")
-        || normalized.includes("too many")
-        || normalized.includes("429")
-        || normalized.includes("temporarily unavailable")
-        || normalized.includes("timeout")
-        || normalized.includes("network")
-        || normalized.includes("fetch failed")
-        || normalized.includes("connection");
-    };
-
     try {
-      const { data, error: signupError } = await supabase.auth.signUp({
-        email: trimmedEmail,
-        password,
-        options: {
-          data: {
-            full_name: trimmedName,
-            role: "primary_caregiver",
-            avatar_url: avatarForName(trimmedName),
-          },
-        },
-      });
-
-      if (signupError) {
-        const signupMessage = signupError.message.toLowerCase();
-        if (signupMessage.includes("email") && signupMessage.includes("confirm")) {
-          onDevLogin?.();
-          setMessage("Account created. Continuing in demo mode while confirmation is pending.");
-        } else if (isTemporaryAuthIssue(signupError.message) || !isSupabaseConfigured) {
-          onDevLogin?.();
-          setMessage("Using demo access while email service is temporarily unavailable.");
-        } else {
-          onDevLogin?.();
-          setMessage("Using demo access for now.");
-        }
-      } else if (data.session || data.user) {
-        onDevLogin?.();
-        setMessage("Account created successfully! Redirecting…");
-      } else if (!isSupabaseConfigured) {
-        onDevLogin?.();
-        setMessage("Account created. Continuing in demo mode because sign-in is not configured.");
-      } else {
-        onDevLogin?.();
-        setMessage("Using demo access for now.");
-      }
-    } catch {
       onDevLogin?.();
       setMessage("Using demo access for now.");
+    } catch {
+      setError("Unable to proceed right now. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

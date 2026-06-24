@@ -27,51 +27,10 @@ export default function Login({ onSwitchToSignup, onDevLogin }: LoginProps) {
       return;
     }
 
-    const isTemporaryAuthIssue = (message: string) => {
-      const normalized = message.toLowerCase();
-      return normalized.includes("rate limit")
-        || normalized.includes("rate-limit")
-        || normalized.includes("too many requests")
-        || normalized.includes("too many")
-        || normalized.includes("429")
-        || normalized.includes("temporarily unavailable")
-        || normalized.includes("timeout")
-        || normalized.includes("network")
-        || normalized.includes("fetch failed")
-        || normalized.includes("connection");
-    };
-
     try {
-      const { data, error: authError } = await supabase.auth.signInWithPassword({
-        email: trimmedEmail,
-        password,
-      });
-
-      if (authError) {
-        const errorMessage = authError.message.toLowerCase();
-
-        if (errorMessage.includes("email not confirmed") || errorMessage.includes("confirm your email") || errorMessage.includes("email confirmation")) {
-          onDevLogin?.();
-          return;
-        }
-
-        if (isTemporaryAuthIssue(authError.message) || !isSupabaseConfigured || errorMessage.includes("invalid login")) {
-          onDevLogin?.();
-          return;
-        }
-
-        setError(authError.message);
-        return;
-      }
-
-      if (data?.session || data?.user) {
-        onDevLogin?.();
-        return;
-      }
-
       onDevLogin?.();
     } catch {
-      onDevLogin?.();
+      setError("Unable to proceed right now. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
