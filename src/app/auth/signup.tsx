@@ -43,9 +43,24 @@ export default function Signup({ onSwitchToLogin, onDevLogin }: SignupProps) {
     setIsSubmitting(true);
 
     try {
-      setError("Use the bypass login button for demo access.");
-      setMessage("");
-    } catch {
+      const { data, error } = await supabase.auth.signUp({
+        email: trimmedEmail,
+        password,
+        options: {
+          data: {
+            full_name: trimmedName,
+          },
+        },
+      });
+
+      if (error) {
+        setError(error.message);
+        return;
+      }
+
+      setMessage("Account created successfully. Check your email.");
+    }
+    catch {
       setError("Unable to proceed right now. Please try again.");
     } finally {
       setIsSubmitting(false);

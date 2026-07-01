@@ -10,7 +10,8 @@ import {
   Flag, Heart, HeartPulse, Home, LogOut, Mic, MicOff, MoonStar,
   Pencil, Phone, Pill, Plus, RefreshCw, Save, Send, Shield,
   Sparkles, Square, Stethoscope, Sun, Trash2, Users, X, Share2,
-  Coffee, Utensils, GlassWater, Scale, UserCheck, Lock, ShieldAlert
+  Coffee, Utensils, GlassWater, Scale, UserCheck, Lock, ShieldAlert, Menu,
+  ClipboardList
 } from "lucide-react";
 import {
   Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
@@ -126,16 +127,16 @@ const ReviewActions = ({
     );
   }
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex flex-wrap items-center gap-1.5">
       <button onClick={onApprove} className="inline-flex items-center gap-1 text-[11px] bg-emerald/15 text-emerald-soft border border-emerald/20 px-2.5 py-1 rounded-full hover:bg-emerald/25 transition cursor-pointer">
         <Check className="size-3" /> Approve
       </button>
       {onEdit && (
-        <button onClick={onEdit} className="inline-flex items-center gap-1 text-[11px] bg-white/5 text-muted-foreground border border-border px-2.5 py-1 rounded-full hover:bg-white/10 transition cursor-pointer">
+        <button onClick={onEdit} className="inline-flex items-center gap-1 text-[11px] bg-black/5 dark:bg-white/5 text-muted-foreground border border-border px-2.5 py-1 rounded-full hover:bg-black/10 dark:bg-white/10 transition cursor-pointer">
           <Edit3 className="size-3" /> Edit
         </button>
       )}
-      <button onClick={onReject} className="inline-flex items-center gap-1 text-[11px] bg-white/5 text-muted-foreground border border-border px-2.5 py-1 rounded-full hover:bg-red-500/10 hover:text-red-400 transition cursor-pointer">
+      <button onClick={onReject} className="inline-flex items-center gap-1 text-[11px] bg-black/5 dark:bg-white/5 text-muted-foreground border border-border px-2.5 py-1 rounded-full hover:bg-red-500/10 hover:text-red-400 transition cursor-pointer">
         <Flag className="size-3" /> Flag
       </button>
     </div>
@@ -418,7 +419,7 @@ const DashboardView = ({
                 <button
                   onClick={generateFamilyUpdate}
                   disabled={generatingFamilyUpdate}
-                  className="inline-flex items-center gap-1.5 text-[11px] bg-emerald/20 text-emerald-soft border border-emerald/20 px-2.5 py-1 rounded-full hover:bg-emerald/30 transition cursor-pointer disabled:opacity-50 font-sans font-medium"
+                  className="inline-flex items-center gap-1.5 text-[11px] bg-emerald text-primary-foreground border border-transparent px-2.5 py-1 rounded-full hover:bg-emerald/30 transition cursor-pointer disabled:opacity-50 font-sans font-medium"
                 >
                   <Share2 className={`size-3 ${generatingFamilyUpdate ? "animate-pulse" : ""}`} />
                   {generatingFamilyUpdate ? "Generating..." : "Share Daily Update"}
@@ -426,7 +427,7 @@ const DashboardView = ({
                 <button
                   onClick={generateSummary}
                   disabled={generatingSummary}
-                  className="inline-flex items-center gap-1.5 text-[11px] bg-indigo/20 text-indigo-soft border border-indigo/20 px-2.5 py-1 rounded-full hover:bg-indigo/30 transition cursor-pointer disabled:opacity-50 font-sans font-medium"
+                  className="inline-flex items-center gap-1.5 text-[11px] bg-indigo text-primary-foreground border border-transparent px-2.5 py-1 rounded-full hover:bg-indigo/30 transition cursor-pointer disabled:opacity-50 font-sans font-medium"
                 >
                   <RefreshCw className={`size-3 ${generatingSummary ? "animate-spin" : ""}`} />
                   {generatingSummary ? "Generating..." : "Generate AI Summary"}
@@ -456,16 +457,16 @@ const DashboardView = ({
           {/* Nutrition Summary Box */}
           <div className="rounded-[22px] rounded-bl-sm bg-secondary border-none p-4 space-y-2.5 font-sans">
             <div className="text-xs text-muted-foreground font-mono uppercase tracking-widest">Nutrition Tracking Summary</div>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
                 <div className="text-[9px] text-muted-foreground font-mono uppercase">Meals Today</div>
                 <div className="text-xs text-foreground font-medium mt-1 truncate">{mealsLoggedText}</div>
               </div>
-              <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+              <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
                 <div className="text-[9px] text-muted-foreground font-mono uppercase">Water Consumed</div>
                 <div className="text-xs text-emerald-soft font-medium mt-1 truncate">{waterIntakeCups} / 8 cups</div>
               </div>
-              <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+              <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
                 <div className="text-[9px] text-muted-foreground font-mono uppercase">Nutrition Risk</div>
                 <span className={`inline-block text-[10px] font-bold px-1.5 py-0.5 rounded uppercase mt-1 ${nutritionRisk === 'Low' ? 'bg-emerald/10 text-emerald-soft' :
                   nutritionRisk === 'Moderate' ? 'bg-amber-500/10 text-warm' :
@@ -503,7 +504,7 @@ const DashboardView = ({
             </div>
             <div className="space-y-2.5">
               {activeAlerts.map((a: any) => (
-                <div key={a.id} className="rounded-xl bg-white/[0.04] p-3 flex justify-between items-start gap-2">
+                <div key={a.id} className="rounded-xl bg-black/[0.04] dark:bg-white/[0.04] p-3 flex justify-between items-start gap-2">
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       <span className={`size-1.5 rounded-full ${a.c === "amber" ? "bg-warm" : a.c === "emerald" ? "bg-emerald" : "bg-indigo-soft"}`} />
@@ -531,7 +532,7 @@ const DashboardView = ({
                   <span className="absolute -left-[21px] top-1.5 size-2.5 rounded-full bg-indigo-deep border border-indigo-soft group-hover:bg-indigo-soft transition" />
                   <div className="flex items-baseline justify-between text-[10px] text-muted-foreground font-mono">
                     <span>{item.time}</span>
-                    <span className="uppercase bg-white/5 px-1 py-0.5 rounded text-muted-foreground">{item.type}</span>
+                    <span className="uppercase bg-black/5 dark:bg-white/5 px-1 py-0.5 rounded text-muted-foreground">{item.type}</span>
                   </div>
                   <div className="text-foreground text-xs font-semibold font-sans mt-0.5">{item.title}</div>
                   {item.desc && <div className="text-[11px] text-muted-foreground leading-snug mt-0.5">{item.desc}</div>}
@@ -540,13 +541,13 @@ const DashboardView = ({
             </div>
 
             {/* Quick Timeline Note Form */}
-            <form onSubmit={handleAddQuickNote} className="mt-4 pt-3 border-t border-border flex gap-2">
+            <form onSubmit={handleAddQuickNote} className="mt-4 pt-3 border-t border-border flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
                 value={quickNote}
                 onChange={e => setQuickNote(e.target.value)}
                 placeholder="Log activity (e.g. Eleanor ate lunch)..."
-                className="flex-1 bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground font-sans"
+                className="flex-1 bg-black/5 dark:bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground font-sans"
               />
               <button
                 type="submit"
@@ -752,18 +753,18 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
         <p className="text-muted-foreground text-xs font-sans">Record a daily voice check-in for cognitive monitoring and symptom tracking.</p>
       </div>
 
-      <div className="flex items-center gap-1.5">
+      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 lg:gap-3">
         {STEPS.map((s, i) => (
           <div key={s.key} className="flex items-center gap-1.5">
             <div className={`size-6 rounded-full flex items-center justify-center text-[10px] font-bold font-mono transition-all ${step === s.key ? "bg-indigo text-foreground ring-2 ring-indigo/30" :
               i < stepIdx ? "bg-emerald/20 text-emerald-soft" :
-                "bg-white/5 text-muted-foreground"
+                "bg-black/5 dark:bg-white/5 text-muted-foreground"
               }`}>
               {i < stepIdx ? <Check className="size-3" /> : i + 1}
             </div>
             <span className={`text-[10px] font-mono uppercase tracking-wider ${step === s.key ? "text-foreground" : i < stepIdx ? "text-emerald-soft/70" : "text-muted-foreground"
               }`}>{s.label}</span>
-            {i < STEPS.length - 1 && <div className="w-5 h-px bg-white/10" />}
+            {i < STEPS.length - 1 && <div className="w-5 h-px bg-black/10 dark:bg-white/10" />}
           </div>
         ))}
       </div>
@@ -812,7 +813,7 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
                 value={transcript}
                 onChange={e => { setTranscript(e.target.value); setIsEdited(true); }}
                 placeholder="Type check-in details..."
-                className="w-full h-28 bg-white/5 rounded-xl px-4 py-3 text-sm text-foreground outline-none border border-border focus:border-indigo-soft/40 resize-none font-sans"
+                className="w-full h-28 bg-black/5 dark:bg-white/5 rounded-xl px-4 py-3 text-sm text-foreground outline-none border border-border focus:border-indigo-soft/40 resize-none font-sans"
               />
               <div className="flex justify-between items-center pt-2">
                 <button onClick={() => setManualMode(false)} className="text-[11px] text-muted-foreground hover:text-muted-foreground transition cursor-pointer">
@@ -850,7 +851,7 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
               <span>Transcript Confidence Score</span>
               <span>{reviewConfidencePercent}%</span>
             </div>
-            <div className="h-2 rounded-full bg-white/5 overflow-hidden">
+            <div className="h-2 rounded-full bg-black/5 dark:bg-white/5 overflow-hidden">
               <div
                 className={`h-full rounded-full transition-all duration-500 ${confidenceColor}`}
                 style={{ width: `${reviewConfidencePercent}%` }}
@@ -885,10 +886,10 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
           </div>
 
           <div className="flex items-center justify-between gap-3 pt-1">
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={handleBackToRecord}
-                className="inline-flex items-center gap-1.5 bg-white/5 text-muted-foreground border border-border px-3.5 py-2 rounded-xl text-xs font-semibold hover:bg-white/10 transition cursor-pointer"
+                className="inline-flex items-center gap-1.5 bg-black/5 dark:bg-white/5 text-muted-foreground border border-border px-3.5 py-2 rounded-xl text-xs font-semibold hover:bg-black/10 dark:bg-white/10 transition cursor-pointer"
               >
                 ← Back
               </button>
@@ -921,7 +922,7 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
           </div>
 
           <div className="space-y-1">
-            <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
+            <div className="h-1.5 rounded-full bg-black/5 dark:bg-white/5 overflow-hidden">
               <div
                 className={`h-full rounded-full transition-all duration-500 ${isEdited ? "bg-emerald" : confidenceColor}`}
                 style={{ width: `${isEdited ? 92 : reviewConfidencePercent}%` }}
@@ -956,22 +957,22 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
             <textarea
               value={transcript}
               onChange={e => { setTranscript(e.target.value); setIsEdited(true); }}
-              className="w-full h-32 bg-white/5 rounded-xl px-4 py-3 text-sm text-foreground outline-none border border-border focus:border-indigo-soft/40 resize-none font-sans"
+              className="w-full h-32 bg-black/5 dark:bg-white/5 rounded-xl px-4 py-3 text-sm text-foreground outline-none border border-border focus:border-indigo-soft/40 resize-none font-sans"
             />
             <div className="text-[10px] text-muted-foreground font-mono">{wordCount} word{wordCount !== 1 ? "s" : ""}</div>
           </div>
 
           <div className="flex items-center justify-between pt-1">
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={() => setStep("transcript")}
-                className="inline-flex items-center gap-1.5 bg-white/5 text-muted-foreground border border-border px-3.5 py-2 rounded-xl text-xs font-semibold hover:bg-white/10 transition cursor-pointer"
+                className="inline-flex items-center gap-1.5 bg-black/5 dark:bg-white/5 text-muted-foreground border border-border px-3.5 py-2 rounded-xl text-xs font-semibold hover:bg-black/10 dark:bg-white/10 transition cursor-pointer"
               >
                 ← Back to Transcript
               </button>
               <button
                 onClick={handleReRecord}
-                className="inline-flex items-center gap-1.5 bg-white/5 text-muted-foreground border border-border px-3 py-2 rounded-xl text-xs font-semibold hover:bg-red-500/10 hover:text-red-400 transition cursor-pointer"
+                className="inline-flex items-center gap-1.5 bg-black/5 dark:bg-white/5 text-muted-foreground border border-border px-3 py-2 rounded-xl text-xs font-semibold hover:bg-red-500/10 hover:text-red-400 transition cursor-pointer"
               >
                 <RefreshCw className="size-3" /> Re-record
               </button>
@@ -998,7 +999,7 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
               <ConfidenceBadge score={result.confidence || 0} />
               <button
                 onClick={handleReset}
-                className="text-xs text-indigo-soft hover:text-foreground font-medium font-sans px-2 py-1 rounded hover:bg-white/5 transition"
+                className="text-xs text-indigo-soft hover:text-foreground font-medium font-sans px-2 py-1 rounded hover:bg-black/5 dark:hover:bg-white/5 transition"
               >
                 New Check-In
               </button>
@@ -1010,7 +1011,7 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
               <span>AI Confidence Score</span>
               <span>{Math.round((result.confidence || 0) * 100)}%</span>
             </div>
-            <div className="h-2 rounded-full bg-white/5 overflow-hidden">
+            <div className="h-2 rounded-full bg-black/5 dark:bg-white/5 overflow-hidden">
               <div
                 className={`h-full rounded-full transition-all duration-700 ${(result.confidence || 0) >= 0.8 ? "bg-emerald" : (result.confidence || 0) >= 0.5 ? "bg-amber-500" : "bg-red-500"
                   }`}
@@ -1046,7 +1047,7 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
             </div>
           )}
 
-          <div className="bg-white/[0.02] border border-border rounded-xl p-3">
+          <div className="bg-black/[0.02] dark:bg-white/[0.02] border border-border rounded-xl p-3">
             <div className="flex items-center justify-between mb-1">
               <div className="text-[9px] uppercase font-mono tracking-wider text-muted-foreground">Verified Transcript</div>
               {result.transcriptEditedByUser === 1 && (
@@ -1072,9 +1073,9 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
               <textarea
                 value={editedSummary}
                 onChange={e => setEditedSummary(e.target.value)}
-                className="w-full h-24 bg-white/5 rounded-xl px-3 py-2.5 text-sm text-foreground outline-none border border-indigo/30 focus:border-indigo-soft/50 resize-none font-sans"
+                className="w-full h-24 bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2.5 text-sm text-foreground outline-none border border-indigo/30 focus:border-indigo-soft/50 resize-none font-sans"
               />
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <button onClick={() => setEditingSummary(false)} className="text-[11px] text-muted-foreground hover:text-muted-foreground transition cursor-pointer">Cancel</button>
                 <button
                   onClick={() => handleReview(result.reviewStatus || "approved", { editedSummary })}
@@ -1086,18 +1087,18 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
             </div>
           )}
 
-          <div className="grid grid-cols-3 gap-3">
-            <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
               <div className="text-[10px] text-muted-foreground font-mono uppercase">Sentiment</div>
               <div className={`text-sm font-medium mt-1 capitalize ${sentimentColors[result.sentiment] || "text-foreground"}`}>
                 {result.sentiment?.replace("_", " ")} ({Math.round((result.sentimentScore || 0) * 100)}%)
               </div>
             </div>
-            <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
               <div className="text-[10px] text-muted-foreground font-mono uppercase">Voice Tone</div>
               <div className="text-sm text-foreground font-medium mt-1 capitalize">{result.voiceTone}</div>
             </div>
-            <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
               <div className="text-[10px] text-muted-foreground font-mono uppercase">Energy</div>
               <div className="text-sm text-foreground font-medium mt-1 capitalize">{result.energy}</div>
             </div>
@@ -1173,7 +1174,7 @@ const VoiceCheckInPanel = ({ patient, fetchPatient }: { patient: any; fetchPatie
             </div>
           </div>
           {history.map((vc: any) => (
-            <div key={vc.id} className="bg-white/[0.03] rounded-xl p-3 border border-border font-sans">
+            <div key={vc.id} className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border font-sans">
               <div className="flex items-center justify-between text-[11px] text-muted-foreground">
                 <span className="font-mono">{vc.date} · {vc.time}</span>
                 <div className="flex items-center gap-2">
@@ -1277,26 +1278,26 @@ const AIAssistantPanel = ({ patient }: { patient: any }) => {
         </div>
 
         {/* Live Summary Card */}
-        <div className="bg-white/[0.02] border-b border-border px-4 py-3 font-sans">
+        <div className="bg-black/[0.02] dark:bg-white/[0.02] border-b border-border px-4 py-3 font-sans">
           <div className="text-[9px] text-muted-foreground uppercase tracking-widest font-mono font-bold">Today's Overview</div>
           <div className="grid grid-cols-5 gap-2 mt-1.5 text-center">
-            <div className="bg-white/5 rounded-lg py-1 px-1.5">
+            <div className="bg-black/5 dark:bg-white/5 rounded-lg py-1 px-1.5">
               <div className="text-[8px] text-muted-foreground font-mono">MOOD</div>
               <div className="text-xs font-semibold text-emerald-soft truncate">{patient?.stats?.mood?.value || "Stable"}</div>
             </div>
-            <div className="bg-white/5 rounded-lg py-1 px-1.5">
+            <div className="bg-black/5 dark:bg-white/5 rounded-lg py-1 px-1.5">
               <div className="text-[8px] text-muted-foreground font-mono">SLEEP</div>
               <div className="text-xs font-semibold text-indigo-soft truncate">{patient?.stats?.sleep?.value || "Good"}</div>
             </div>
-            <div className="bg-white/5 rounded-lg py-1 px-1.5">
+            <div className="bg-black/5 dark:bg-white/5 rounded-lg py-1 px-1.5">
               <div className="text-[8px] text-muted-foreground font-mono">MEDS</div>
               <div className="text-xs font-semibold text-foreground truncate">{patient?.stats?.meds?.value || "0/0"}</div>
             </div>
-            <div className="bg-white/5 rounded-lg py-1 px-1.5">
+            <div className="bg-black/5 dark:bg-white/5 rounded-lg py-1 px-1.5">
               <div className="text-[8px] text-muted-foreground font-mono">ALERTS</div>
               <div className="text-xs font-semibold text-red-400 truncate">{activeAlertsCount}</div>
             </div>
-            <div className="bg-white/5 rounded-lg py-1 px-1.5">
+            <div className="bg-black/5 dark:bg-white/5 rounded-lg py-1 px-1.5">
               <div className="text-[8px] text-muted-foreground font-mono">CARE PLANS</div>
               <div className="text-xs font-semibold text-foreground truncate">Active</div>
             </div>
@@ -1334,15 +1335,15 @@ const AIAssistantPanel = ({ patient }: { patient: any }) => {
               <button
                 key={s}
                 onClick={() => handleSend(s)}
-                className="text-[10px] px-2.5 py-1 rounded-full bg-white/5 text-muted-foreground hover:bg-indigo-soft/20 hover:text-foreground transition cursor-pointer font-sans"
+                className="text-[10px] px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/5 text-muted-foreground hover:bg-indigo-soft/20 hover:text-foreground transition cursor-pointer font-sans"
               >
                 {s}
               </button>
             ))}
           </div>
-          <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2">
+          <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex flex-col sm:flex-row gap-2">
             <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="Ask Rocky about Eleanor's status..."
-              className="flex-1 bg-white/5 rounded-xl px-3.5 py-2.5 text-sm outline-none border border-transparent focus:border-indigo-soft/40 text-foreground font-sans" />
+              className="flex-1 bg-black/5 dark:bg-white/5 rounded-xl px-3.5 py-2.5 text-sm outline-none border border-transparent focus:border-indigo-soft/40 text-foreground font-sans" />
             <button type="submit" className="bg-indigo text-foreground px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-deep transition cursor-pointer">
               <Send className="size-4" />
             </button>
@@ -1357,7 +1358,49 @@ const AIAssistantPanel = ({ patient }: { patient: any }) => {
 // MEDICATION TRACKER
 // ═════════════════════════════════════════════════════════════════════
 
-const MedicationPanel = ({ patient, onToggleMed, onAddMed }: { patient: any; onToggleMed: (id: string) => void; onAddMed: (name: string, time: string) => void }) => {
+const MedicationPanel = ({ patient, onToggleMed, onAddMed, setPatient }: { patient: any; onToggleMed: (id: string) => void; onAddMed: (name: string, time: string) => void; setPatient: (p: any) => void }) => {
+  const [editMed, setEditMed] = useState<any>(null);
+  const [editName, setEditName] = useState("");
+  const [editTime, setEditTime] = useState("");
+
+  const openEditModal = (m: any) => {
+    setEditMed(m);
+    setEditName(m.name);
+    setEditTime(m.time);
+  };
+
+  const handleEditMed = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await apiFetch(`/api/meds/${editMed.id}`, {
+        method: "PUT",
+        body: JSON.stringify({ name: editName, time: editTime })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(data.message);
+        setPatient(data.patient);
+        setEditMed(null);
+      } else {
+        toast.error(data.message);
+      }
+    } catch { toast.error("Network error"); }
+  };
+
+  const handleDeleteMed = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this medication?")) return;
+    try {
+      const res = await apiFetch(`/api/meds/${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(data.message);
+        setPatient(data.patient);
+      } else {
+        toast.error(data.message);
+      }
+    } catch { toast.error("Network error"); }
+  };
+
   const medications = patient?.medications || [];
   const [newMedName, setNewMedName] = useState("");
   const [newMedTime, setNewMedTime] = useState("8:00 AM");
@@ -1411,14 +1454,14 @@ const MedicationPanel = ({ patient, onToggleMed, onAddMed }: { patient: any; onT
               <span>WEEKLY ADHERENCE</span>
               <span className="font-bold text-foreground">{adherence.weekly}%</span>
             </div>
-            <div className="w-full bg-white/5 rounded-full h-2">
+            <div className="w-full bg-black/5 dark:bg-white/5 rounded-full h-2">
               <div className={`h-2 rounded-full transition-all duration-500 ${adherence.weekly >= 90 ? 'bg-emerald' : 'bg-amber-500'}`} style={{ width: `${adherence.weekly}%` }} />
             </div>
             <div className="flex items-center justify-between text-xs text-muted-foreground font-mono mt-4">
               <span>MONTHLY ADHERENCE</span>
               <span className="font-bold text-foreground">{adherence.monthly}%</span>
             </div>
-            <div className="w-full bg-white/5 rounded-full h-2">
+            <div className="w-full bg-black/5 dark:bg-white/5 rounded-full h-2">
               <div className={`h-2 rounded-full transition-all duration-500 ${adherence.monthly >= 85 ? 'bg-indigo-soft' : 'bg-amber-500'}`} style={{ width: `${adherence.monthly}%` }} />
             </div>
           </div>
@@ -1428,7 +1471,7 @@ const MedicationPanel = ({ patient, onToggleMed, onAddMed }: { patient: any; onT
             {adherence.missed?.length > 0 ? (
               <div className="space-y-2.5">
                 {adherence.missed.map((m: any, i: number) => (
-                  <div key={i} className="flex items-center justify-between bg-white/[0.02] border border-border p-2.5 rounded-xl text-xs font-sans">
+                  <div key={i} className="flex items-center justify-between bg-black/[0.02] dark:bg-white/[0.02] border border-border p-2.5 rounded-xl text-xs font-sans">
                     <div>
                       <div className="text-foreground font-medium">{m.name}</div>
                       <div className="text-muted-foreground">{m.time}</div>
@@ -1457,7 +1500,7 @@ const MedicationPanel = ({ patient, onToggleMed, onAddMed }: { patient: any; onT
         </div>
 
         {isFamilyMember && (
-          <div className="bg-white/5 border border-border text-[11px] text-muted-foreground p-2.5 rounded-xl flex items-center gap-2 font-sans">
+          <div className="bg-black/5 dark:bg-white/5 border border-border text-[11px] text-muted-foreground p-2.5 rounded-xl flex items-center gap-2 font-sans">
             <Lock className="size-3.5 text-muted-foreground" />
             <span>Logged in as <strong>Family Member</strong>. View-only access.</span>
           </div>
@@ -1465,7 +1508,7 @@ const MedicationPanel = ({ patient, onToggleMed, onAddMed }: { patient: any; onT
 
         <div className="space-y-2.5">
           {medications.map((m: any) => (
-            <div key={m.id} className="flex items-center justify-between bg-white/[0.03] p-3 rounded-xl border border-border font-sans">
+            <div key={m.id} className="flex items-center justify-between bg-black/[0.03] dark:bg-white/[0.03] p-3 rounded-xl border border-border font-sans">
               <div className="flex items-center gap-3">
                 <input type="checkbox" checked={m.taken} onChange={() => handleToggleAttempt(m.id)} disabled={isFamilyMember}
                   className="size-4 rounded border-border text-indigo focus:ring-indigo bg-transparent cursor-pointer disabled:opacity-50" />
@@ -1474,9 +1517,21 @@ const MedicationPanel = ({ patient, onToggleMed, onAddMed }: { patient: any; onT
                   <div className="text-[11px] text-muted-foreground">{m.time} · {m.frequency || "daily"}{m.prescriber ? ` · ${m.prescriber}` : ""}</div>
                 </div>
               </div>
-              <span className={`text-[10px] uppercase font-mono px-2 py-0.5 rounded-full ${m.taken ? 'bg-emerald/10 text-emerald-soft' : 'bg-amber-500/10 text-warm'}`}>
-                {m.taken ? 'Taken ✓' : 'Pending'}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className={`text-[10px] uppercase font-mono px-2 py-0.5 rounded-full ${m.taken ? 'bg-emerald/10 text-emerald-soft' : 'bg-amber-500/10 text-warm'}`}>
+                  {m.taken ? 'Taken ✓' : 'Pending'}
+                </span>
+                {!isFamilyMember && (
+                  <div className="flex gap-1 ml-2">
+                    <button onClick={() => openEditModal(m)} className="p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded text-muted-foreground hover:text-indigo-soft transition">
+                      <Edit3 className="size-3.5" />
+                    </button>
+                    <button onClick={() => handleDeleteMed(m.id)} className="p-1.5 hover:bg-red-500/10 rounded text-muted-foreground hover:text-red-400 transition">
+                      <Trash2 className="size-3.5" />
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
           {medications.length === 0 && (
@@ -1484,13 +1539,37 @@ const MedicationPanel = ({ patient, onToggleMed, onAddMed }: { patient: any; onT
           )}
         </div>
 
+        {editMed && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-card border border-border w-full max-w-sm rounded-2xl p-6 shadow-2xl">
+              <h3 className="text-lg font-serif text-foreground mb-4">Edit Medication</h3>
+              <form onSubmit={handleEditMed} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-mono text-muted-foreground mb-1">Medication Name</label>
+                  <input type="text" value={editName} onChange={e => setEditName(e.target.value)} required
+                    className="w-full bg-black/5 dark:bg-white/5 border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:border-indigo-soft/50 outline-none" />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono text-muted-foreground mb-1">Time</label>
+                  <input type="text" value={editTime} onChange={e => setEditTime(e.target.value)} required
+                    className="w-full bg-black/5 dark:bg-white/5 border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:border-indigo-soft/50 outline-none" />
+                </div>
+                <div className="flex gap-2 justify-end pt-2">
+                  <button type="button" onClick={() => setEditMed(null)} className="px-4 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition">Cancel</button>
+                  <button type="submit" className="px-4 py-2 text-xs font-medium bg-indigo text-primary-foreground rounded-xl hover:bg-indigo/90 transition shadow-sm">Save Changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
         {!isFamilyMember && (
-          <form onSubmit={handleSubmit} className="border-t border-border pt-4 flex gap-2 font-sans">
+          <form onSubmit={handleSubmit} className="border-t border-border pt-4 flex flex-col sm:flex-row gap-2 font-sans">
             <input required type="text" value={newMedName} onChange={e => setNewMedName(e.target.value)} placeholder="New Med (e.g. Vitamin D3)"
-              className="flex-1 bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+              className="flex-1 bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
             <input required type="text" value={newMedTime} onChange={e => setNewMedTime(e.target.value)} placeholder="Time"
-              className="w-28 bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
-            <button type="submit" className="bg-indigo-soft/20 text-foreground border border-border px-3 py-2 rounded-xl text-xs font-medium hover:bg-indigo-soft/35 transition cursor-pointer">Add</button>
+              className="w-full sm:w-28 bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+            <button type="submit" className="w-full sm:w-auto bg-indigo-soft/20 text-foreground border border-border px-3 py-2 rounded-xl text-xs font-medium hover:bg-indigo-soft/35 transition cursor-pointer">Add</button>
           </form>
         )}
       </div>
@@ -1502,7 +1581,49 @@ const MedicationPanel = ({ patient, onToggleMed, onAddMed }: { patient: any; onT
 // CARE PLANS
 // ═════════════════════════════════════════════════════════════════════
 
-const CarePlansPanel = ({ patient }: { patient: any }) => {
+const CarePlansPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: () => Promise<void> }) => {
+  const [editPlan, setEditPlan] = useState<any>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editDesc, setEditDesc] = useState("");
+
+  const openEditPlanModal = (p: any) => {
+    setEditPlan(p);
+    setEditTitle(p.title);
+    setEditDesc(p.description || "");
+  };
+
+  const handleEditPlan = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await apiFetch(`/api/care-plans/${editPlan.id}`, {
+        method: "PUT",
+        body: JSON.stringify({ title: editTitle, description: editDesc })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(data.message);
+        setEditPlan(null);
+        fetchPlans(); 
+      } else {
+        toast.error(data.message);
+      }
+    } catch { toast.error("Network error"); }
+  };
+
+  const handleDeletePlan = async (id: string) => {
+    if (!confirm("Delete this care plan?")) return;
+    try {
+      const res = await apiFetch(`/api/care-plans/${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(data.message);
+        fetchPlans();
+      } else {
+        toast.error(data.message);
+      }
+    } catch { toast.error("Network error"); }
+  };
+
   const [plans, setPlans] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -1568,7 +1689,7 @@ const CarePlansPanel = ({ patient }: { patient: any }) => {
     nutrition: "bg-amber-500/10 text-warm border-amber-500/20",
     medical: "bg-red-500/10 text-red-400 border-red-500/20",
     wellness: "bg-indigo/10 text-indigo-soft border-indigo/20",
-    general: "bg-white/5 text-muted-foreground border-border",
+    general: "bg-black/5 dark:bg-white/5 text-muted-foreground border-border",
   };
 
   const completedCount = plans.filter(p => p.completedToday).length;
@@ -1585,7 +1706,7 @@ const CarePlansPanel = ({ patient }: { patient: any }) => {
         </div>
         {!isFamilyMember && (
           <button onClick={() => setShowForm(!showForm)}
-            className="inline-flex items-center gap-1.5 bg-indigo/20 text-indigo-soft border border-indigo/20 px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-indigo/30 transition cursor-pointer">
+            className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground border border-transparent px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-indigo/30 transition cursor-pointer">
             <Plus className="size-3.5" /> Add Plan
           </button>
         )}
@@ -1593,23 +1714,23 @@ const CarePlansPanel = ({ patient }: { patient: any }) => {
 
       {/* Progress Widgets */}
       <div className="grid sm:grid-cols-2 gap-4">
-        <div className="bg-white/[0.04] border border-border rounded-2xl p-4">
+        <div className="bg-black/[0.04] dark:bg-white/[0.04] border border-border rounded-2xl p-4">
           <div className="flex justify-between items-center text-xs text-muted-foreground font-mono">
             <span>WEEKLY COMPLETION RATE</span>
             <span className="font-bold text-foreground">{weeklyRate}%</span>
           </div>
-          <div className="w-full bg-white/5 rounded-full h-2 mt-2">
+          <div className="w-full bg-black/5 dark:bg-white/5 rounded-full h-2 mt-2">
             <div className="bg-emerald h-2 rounded-full transition-all duration-500" style={{ width: `${weeklyRate}%` }} />
           </div>
           <div className="text-[10px] text-muted-foreground mt-1.5">Based on {completedCount} completed out of {totalCount} active tasks this week.</div>
         </div>
 
-        <div className="bg-white/[0.04] border border-border rounded-2xl p-4">
+        <div className="bg-black/[0.04] dark:bg-white/[0.04] border border-border rounded-2xl p-4">
           <div className="flex justify-between items-center text-xs text-muted-foreground font-mono">
             <span>MONTHLY COMPLETION RATE</span>
             <span className="font-bold text-foreground">{monthlyRate}%</span>
           </div>
-          <div className="w-full bg-white/5 rounded-full h-2 mt-2">
+          <div className="w-full bg-black/5 dark:bg-white/5 rounded-full h-2 mt-2">
             <div className="bg-indigo-soft h-2 rounded-full transition-all duration-500" style={{ width: `${monthlyRate}%` }} />
           </div>
           <div className="text-[10px] text-muted-foreground mt-1.5">Estimated historical consistency for current caregiver team.</div>
@@ -1617,7 +1738,7 @@ const CarePlansPanel = ({ patient }: { patient: any }) => {
       </div>
 
       {isFamilyMember && (
-        <div className="bg-white/5 border border-border text-[11px] text-muted-foreground p-2.5 rounded-xl flex items-center gap-2">
+        <div className="bg-black/5 dark:bg-white/5 border border-border text-[11px] text-muted-foreground p-2.5 rounded-xl flex items-center gap-2">
           <Lock className="size-3.5 text-muted-foreground" />
           <span>Logged in as <strong>Family Member</strong>. View-only access to care plans.</span>
         </div>
@@ -1626,24 +1747,24 @@ const CarePlansPanel = ({ patient }: { patient: any }) => {
       {showForm && !isFamilyMember && (
         <form onSubmit={handleAdd} className="rounded-[22px] rounded-bl-sm bg-secondary border-none p-4 space-y-3 font-sans">
           <input required type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Plan title *"
-            className="w-full bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+            className="w-full bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
           <textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description (optional)"
-            className="w-full bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground h-16 resize-none" />
-          <div className="grid grid-cols-3 gap-3">
+            className="w-full bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground h-16 resize-none" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <select value={category} onChange={e => setCategory(e.target.value)}
-              className="bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground [&>option]:bg-[#1e2261] [&>option]:text-foreground">
+              className="bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground [&>option]:bg-background [&>option]:text-foreground">
               <option value="wellness">Wellness</option>
               <option value="exercise">Exercise</option>
               <option value="nutrition">Nutrition</option>
               <option value="medical">Medical</option>
             </select>
             <input type="text" value={time} onChange={e => setTime(e.target.value)} placeholder="Time (e.g. 8:30 AM)"
-              className="bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+              className="bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
             <input type="text" value={assignedTo} onChange={e => setAssignedTo(e.target.value)} placeholder="Assigned caregiver"
-              className="bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+              className="bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
           </div>
-          <div className="flex gap-2">
-            <button type="submit" className="bg-emerald/20 text-emerald-soft border border-emerald/20 px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-emerald/30 transition cursor-pointer">Create</button>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <button type="submit" className="bg-primary text-primary-foreground border border-transparent px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-emerald/30 transition cursor-pointer">Create</button>
             <button type="button" onClick={() => setShowForm(false)} className="text-muted-foreground text-xs hover:text-muted-foreground transition cursor-pointer">Cancel</button>
           </div>
         </form>
@@ -1664,7 +1785,7 @@ const CarePlansPanel = ({ patient }: { patient: any }) => {
                     {/* Status badges / toggle */}
                     {isFamilyMember ? (
                       <span className={`text-[10px] px-2 py-0.5 rounded border capitalize ${currentStatus === 'completed' ? 'bg-emerald/10 text-emerald-soft border-emerald/20' :
-                        currentStatus === 'skipped' ? 'bg-white/5 text-muted-foreground border-border' :
+                        currentStatus === 'skipped' ? 'bg-black/5 dark:bg-white/5 text-muted-foreground border-border' :
                           'bg-amber-500/10 text-warm border-amber-500/20'
                         }`}>
                         {currentStatus}
@@ -1674,7 +1795,7 @@ const CarePlansPanel = ({ patient }: { patient: any }) => {
                         value={currentStatus}
                         onChange={e => handleStatusChange(p.id, e.target.value)}
                         className={`text-[10px] px-2 py-0.5 rounded border capitalize outline-none cursor-pointer ${currentStatus === 'completed' ? 'bg-emerald/25 text-emerald-soft border-emerald/30 [&>option]:bg-indigo-deep' :
-                          currentStatus === 'skipped' ? 'bg-white/10 text-muted-foreground border-border [&>option]:bg-indigo-deep' :
+                          currentStatus === 'skipped' ? 'bg-black/10 dark:bg-white/10 text-muted-foreground border-border [&>option]:bg-indigo-deep' :
                             'bg-amber-500/20 text-warm border-amber-500/30 [&>option]:bg-indigo-deep'
                           }`}
                       >
@@ -1704,6 +1825,708 @@ const CarePlansPanel = ({ patient }: { patient: any }) => {
           );
         })}
       </div>
+    </div>
+  );
+};
+
+// ═════════════════════════════════════════════════════════════════════
+// CARE COORDINATION HUB
+// ═════════════════════════════════════════════════════════════════════
+
+const CareCoordinationHubPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: () => Promise<void> }) => {
+  const [notes, setNotes] = useState<any[]>([]);
+  const [checklist, setChecklist] = useState<any[]>([]);
+  const [plans, setPlans] = useState<any[]>([]);
+  const [voiceCheckins, setVoiceCheckins] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Notes Form State
+  const [noteCategory, setNoteCategory] = useState("Doctor Call");
+  const [noteText, setNoteText] = useState("");
+  const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
+  const [editingNoteText, setEditingNoteText] = useState("");
+  const [editingNoteCategory, setEditingNoteCategory] = useState("Doctor Call");
+
+  // Checklist Form State
+  const [checklistNotes, setChecklistNotes] = useState<Record<string, string>>({});
+  const [updatingChecklistStatusKey, setUpdatingChecklistStatusKey] = useState<string | null>(null);
+  const [savingChecklistId, setSavingChecklistId] = useState<string | null>(null);
+  const [savingNote, setSavingNote] = useState(false);
+  const [deletingNoteId, setDeletingNoteId] = useState<string | null>(null);
+
+  const fetchHubData = async (silent = false) => {
+    if (!patient?.id) return;
+    try {
+      if (!silent) {
+        setLoading(true);
+      }
+      
+      // Fetch Notes
+      const notesRes = await apiFetch("/api/coordination-notes");
+      const notesData = await notesRes.json();
+      if (notesData.success) setNotes(notesData.notes || []);
+
+      // Fetch Checklist
+      const checklistRes = await apiFetch("/api/records-checklist");
+      const checklistData = await checklistRes.json();
+      if (checklistData.success) {
+        setChecklist(checklistData.checklist || []);
+        
+        // Merge notes so typed-but-unsaved notes are not cleared by a silent update
+        setChecklistNotes(prev => {
+          const updated = { ...prev };
+          (checklistData.checklist || []).forEach((item: any) => {
+            if (updated[item.id] === undefined) {
+              updated[item.id] = item.notes || "";
+            }
+          });
+          return updated;
+        });
+      }
+
+      // Fetch Care Plans
+      const plansRes = await apiFetch("/api/care-plans");
+      const plansData = await plansRes.json();
+      setPlans(plansData.carePlans || []);
+
+      // Fetch Voice Check-ins
+      const vcRes = await apiFetch("/api/voice-checkins?limit=5");
+      const vcData = await vcRes.json();
+      setVoiceCheckins(vcData.checkins || []);
+
+    } catch (err) {
+      console.error("Error fetching coordination hub data:", err);
+    } finally {
+      if (!silent) {
+        setLoading(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchHubData();
+  }, [patient?.id]);
+
+  const handleAddNote = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!noteText.trim()) return;
+    setSavingNote(true);
+    try {
+      const res = await apiFetch("/api/coordination-notes", {
+        method: "POST",
+        body: JSON.stringify({ category: noteCategory, note: noteText })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Note added successfully");
+        setNoteText("");
+        setNotes(prev => [data.note, ...prev]);
+        fetchHubData(true);
+      } else {
+        toast.error(data.message || "Failed to add note");
+      }
+    } catch {
+      toast.error("Network error");
+    } finally {
+      setSavingNote(false);
+    }
+  };
+
+  const handleStartEditNote = (note: any) => {
+    setEditingNoteId(note.id);
+    setEditingNoteText(note.note);
+    setEditingNoteCategory(note.category);
+  };
+
+  const handleUpdateNote = async (id: string) => {
+    if (!editingNoteText.trim()) return;
+    setSavingNote(true);
+    try {
+      const res = await apiFetch(`/api/coordination-notes/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ category: editingNoteCategory, note: editingNoteText })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Note updated successfully");
+        setEditingNoteId(null);
+        setNotes(prev => prev.map(n => n.id === id ? data.note : n));
+        fetchHubData(true);
+      } else {
+        toast.error(data.message || "Failed to update note");
+      }
+    } catch {
+      toast.error("Network error");
+    } finally {
+      setSavingNote(false);
+    }
+  };
+
+  const handleDeleteNote = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this note?")) return;
+    setDeletingNoteId(id);
+    try {
+      const res = await apiFetch(`/api/coordination-notes/${id}`, {
+        method: "DELETE"
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Note deleted");
+        setNotes(prev => prev.filter(n => n.id !== id));
+        fetchHubData(true);
+      } else {
+        toast.error(data.message || "Failed to delete note");
+      }
+    } catch {
+      toast.error("Network error");
+    } finally {
+      setDeletingNoteId(null);
+    }
+  };
+
+  const handleUpdateChecklistStatus = async (item: any, newStatus: string) => {
+    const statusKey = `${item.id}-${newStatus}`;
+    setUpdatingChecklistStatusKey(statusKey);
+    try {
+      const res = await apiFetch(`/api/records-checklist/${item.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ status: newStatus, notes: checklistNotes[item.id] || "" })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(`${item.item_name} updated`);
+        setChecklist(prev => prev.map(c => c.id === item.id ? data.item : c));
+        fetchHubData(true);
+      } else {
+        toast.error(data.message || "Failed to update checklist item");
+      }
+    } catch {
+      toast.error("Network error");
+    } finally {
+      setUpdatingChecklistStatusKey(null);
+    }
+  };
+
+  const handleSaveChecklistNotes = async (item: any) => {
+    setSavingChecklistId(item.id);
+    try {
+      const res = await apiFetch(`/api/records-checklist/${item.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ status: item.status, notes: checklistNotes[item.id] || "" })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(`Notes saved for ${item.item_name}`);
+        setChecklist(prev => prev.map(c => c.id === item.id ? data.item : c));
+        fetchHubData(true);
+      } else {
+        toast.error(data.message || "Failed to save checklist notes");
+      }
+    } catch {
+      toast.error("Network error");
+    } finally {
+      setSavingChecklistId(null);
+    }
+  };
+
+  // Calculations for snapshots
+  const medications = patient?.medications || [];
+  const dueMeds = medications.filter((m: any) => !m.taken);
+  const takenMeds = medications.filter((m: any) => m.taken);
+  const pendingTasks = plans.filter((p: any) => !p.completedToday && p.status !== 'skipped');
+  const completedTasks = plans.filter((p: any) => p.completedToday);
+  const skippedTasks = plans.filter((p: any) => p.status === 'skipped');
+  const unresolvedAlerts = (patient?.alerts || []).filter((a: any) => !a.resolved);
+
+  // Today's Priorities list builder
+  const priorities: { type: string; title: string; desc: string; severity: "info" | "warn" | "danger" | "success" }[] = [];
+
+  dueMeds.forEach((m: any) => {
+    priorities.push({
+      type: "Medication Due",
+      title: `${m.name} (${m.time})`,
+      desc: m.notes ? `Note: ${m.notes}` : "Scheduled morning/afternoon dose.",
+      severity: "warn"
+    });
+  });
+
+  pendingTasks.forEach((p: any) => {
+    priorities.push({
+      type: "Care Plan Task",
+      title: p.title,
+      desc: p.description || `Assigned to: ${p.assignedTo || 'Caregiver'}`,
+      severity: "info"
+    });
+  });
+
+  unresolvedAlerts.forEach((a: any) => {
+    priorities.push({
+      type: "Alert",
+      title: a.t,
+      desc: a.d,
+      severity: a.sev === "danger" || a.c === "red" ? "danger" : "warn"
+    });
+  });
+
+  const latestCheckin = voiceCheckins[0];
+  const hasVoiceConcern = latestCheckin && (latestCheckin.sentiment === "concerning" || latestCheckin.sentiment === "negative" || (latestCheckin.flags && latestCheckin.flags.length > 0));
+  if (hasVoiceConcern) {
+    priorities.push({
+      type: "Voice Check-in Concern",
+      title: `Latest Check-in flagged (${latestCheckin.time})`,
+      desc: latestCheckin.aiSummary || `Flags: ${latestCheckin.flags.join(", ")}`,
+      severity: "danger"
+    });
+  }
+
+  const getNextMedTime = () => {
+    if (dueMeds.length === 0) return "No more medications due today";
+    return dueMeds[0].time;
+  };
+
+  const categories = [
+    "Doctor Call",
+    "Insurance Call",
+    "Medicare Notes",
+    "Hospice Notes",
+    "General Coordination Notes"
+  ];
+
+  return (
+    <div className="space-y-6 font-sans pb-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-5">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
+            <ClipboardList className="size-6 text-indigo-soft" />
+            Care Coordination Hub
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Central coordination dashboard for <span className="font-semibold text-foreground">{patient?.name || 'Active Patient'}</span>
+          </p>
+        </div>
+        <button
+          onClick={fetchHubData}
+          className="flex items-center justify-center gap-2 px-3 py-1.5 rounded-xl border border-border bg-card text-xs text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 transition"
+        >
+          <RefreshCw className="size-3.5" />
+          Refresh Data
+        </button>
+      </div>
+
+      {loading ? (
+        <div className="flex items-center justify-center py-20 text-muted-foreground text-sm gap-2">
+          <Activity className="size-4 animate-pulse text-indigo-soft" /> Loading coordination profile...
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            
+            <div className="bg-card border border-border rounded-[24px] p-5 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-border pb-3">
+                <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
+                  <Bell className="size-4.5 text-amber-500" />
+                  Today's Priorities ({priorities.length})
+                </h2>
+                <span className="text-[10px] bg-black/5 dark:bg-white/10 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">
+                  Action Items
+                </span>
+              </div>
+
+              {priorities.length === 0 ? (
+                <div className="text-center py-6 text-muted-foreground text-xs bg-emerald/5 border border-emerald/10 rounded-2xl flex flex-col items-center gap-1.5">
+                  <CheckCircle className="size-6 text-emerald-soft" />
+                  <span className="font-medium text-foreground">All clear for today!</span>
+                  No outstanding medication doses, pending care tasks, or alerts.
+                </div>
+              ) : (
+                <div className="space-y-3 max-h-[350px] overflow-y-auto pr-1">
+                  {priorities.map((item, idx) => {
+                    const badgeColors = {
+                      info: "bg-indigo-soft/10 text-indigo-soft border-indigo-soft/20",
+                      warn: "bg-amber-500/10 text-warm border-amber-500/20",
+                      danger: "bg-red-500/10 text-red-400 border-red-500/20",
+                      success: "bg-emerald/10 text-emerald-soft border-emerald/20"
+                    };
+                    const borderColors = {
+                      info: "border-l-4 border-l-indigo-soft",
+                      warn: "border-l-4 border-l-amber-500",
+                      danger: "border-l-4 border-l-red-500",
+                      success: "border-l-4 border-l-emerald"
+                    };
+                    return (
+                      <div key={idx} className={`p-4 rounded-2xl bg-secondary/40 border border-border ${borderColors[item.severity]} flex items-start justify-between gap-3`}>
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className={`text-[9px] font-mono uppercase px-2 py-0.5 rounded-full border ${badgeColors[item.severity]}`}>
+                              {item.type}
+                            </span>
+                          </div>
+                          <h4 className="text-sm font-semibold text-foreground leading-snug">{item.title}</h4>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <div className="bg-card border border-border rounded-[24px] p-5 shadow-sm flex flex-col justify-between space-y-4">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between border-b border-border pb-3">
+                    <h2 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                      <Pill className="size-4.5 text-emerald-soft" />
+                      Medication Snapshot
+                    </h2>
+                    <span className="text-[10px] text-muted-foreground font-mono">TODAY</span>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3 text-center">
+                    <div className="bg-secondary/40 border border-border p-3 rounded-2xl">
+                      <div className="text-lg font-bold text-foreground">{medications.length}</div>
+                      <div className="text-[9px] text-muted-foreground uppercase font-mono mt-0.5">Total</div>
+                    </div>
+                    <div className="bg-emerald/5 border border-emerald/10 p-3 rounded-2xl">
+                      <div className="text-lg font-bold text-emerald-soft">{takenMeds.length}</div>
+                      <div className="text-[9px] text-muted-foreground uppercase font-mono mt-0.5">Taken</div>
+                    </div>
+                    <div className="bg-amber-500/5 border border-amber-500/10 p-3 rounded-2xl">
+                      <div className="text-lg font-bold text-amber-500">{dueMeds.length}</div>
+                      <div className="text-[9px] text-muted-foreground uppercase font-mono mt-0.5">Due</div>
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-secondary/40 border border-border rounded-xl flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground">Next Scheduled Dose:</span>
+                    <span className="font-semibold text-foreground flex items-center gap-1">
+                      <Clock className="size-3.5 text-muted-foreground" />
+                      {getNextMedTime()}
+                    </span>
+                  </div>
+                </div>
+                
+                {dueMeds.length > 0 && (
+                  <div className="text-[10px] text-muted-foreground mt-3 font-mono border-t border-border/40 pt-3">
+                    * Make sure to document pill intake in the Medications tab.
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-card border border-border rounded-[24px] p-5 shadow-sm flex flex-col justify-between space-y-4">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between border-b border-border pb-3">
+                    <h2 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                      <Calendar className="size-4.5 text-indigo-soft" />
+                      Care Plan Snapshot
+                    </h2>
+                    <span className="text-[10px] text-muted-foreground font-mono">STATUS</span>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3 text-center">
+                    <div className="bg-amber-500/5 border border-amber-500/10 p-3 rounded-2xl">
+                      <div className="text-lg font-bold text-amber-500">{pendingTasks.length}</div>
+                      <div className="text-[9px] text-muted-foreground uppercase font-mono mt-0.5">Pending</div>
+                    </div>
+                    <div className="bg-emerald/5 border border-emerald/10 p-3 rounded-2xl">
+                      <div className="text-lg font-bold text-emerald-soft">{completedTasks.length}</div>
+                      <div className="text-[9px] text-muted-foreground uppercase font-mono mt-0.5">Done</div>
+                    </div>
+                    <div className="bg-black/5 dark:bg-white/5 border border-border p-3 rounded-2xl">
+                      <div className="text-lg font-bold text-muted-foreground">{skippedTasks.length}</div>
+                      <div className="text-[9px] text-muted-foreground uppercase font-mono mt-0.5">Skipped</div>
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-secondary/40 border border-border rounded-xl flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground">Completion Rate:</span>
+                    <span className="font-semibold text-foreground">
+                      {plans.length > 0 ? Math.round((completedTasks.length / plans.length) * 100) : 0}%
+                    </span>
+                  </div>
+                </div>
+
+                <div className="text-[10px] text-muted-foreground mt-3 font-mono border-t border-border/40 pt-3">
+                  * Manage specific tasks inside the Care Plans dashboard.
+                </div>
+              </div>
+
+            </div>
+
+            <div className="bg-card border border-border rounded-[24px] p-5 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-border pb-3">
+                <div>
+                  <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
+                    <CheckCircle className="size-4.5 text-emerald-soft" />
+                    Essential Records Checklist
+                  </h2>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">
+                    Track vital document statuses for care transitions
+                  </p>
+                </div>
+                <div className="text-xs bg-emerald/10 text-emerald-soft border border-emerald/20 px-2.5 py-0.5 rounded-full font-semibold font-mono">
+                  {checklist.filter(c => c.status === 'available').length} / {checklist.length} Ready
+                </div>
+              </div>
+
+              <div className="divide-y divide-border/60 max-h-[480px] overflow-y-auto pr-1">
+                {checklist.map((item) => (
+                  <div key={item.id} className="py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="space-y-1 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-sm text-foreground">{item.item_name}</span>
+                        <span className={`text-[9px] uppercase px-2 py-0.5 rounded-full border font-mono ${
+                          item.status === 'available' ? 'bg-emerald/10 text-emerald-soft border-emerald/20' :
+                          item.status === 'needs update' ? 'bg-amber-500/10 text-warm border-amber-500/20' :
+                          'bg-red-500/10 text-red-400 border-red-500/20'
+                        }`}>
+                          {item.status}
+                        </span>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 mt-1">
+                        <input
+                          type="text"
+                          value={checklistNotes[item.id] ?? ""}
+                          onChange={(e) => setChecklistNotes({ ...checklistNotes, [item.id]: e.target.value })}
+                          placeholder="Add detail notes (e.g. 'Stored in blue drawer')"
+                          className="flex-1 bg-black/5 dark:bg-white/5 border border-transparent hover:border-border focus:border-indigo-soft/40 outline-none rounded-lg px-2.5 py-1 text-xs text-foreground transition"
+                        />
+                        <button
+                          onClick={() => handleSaveChecklistNotes(item)}
+                          disabled={savingChecklistId === item.id}
+                          className={`px-2 py-1 rounded-lg bg-indigo-soft/10 text-indigo-soft hover:bg-indigo-soft/20 text-[10px] font-medium transition shrink-0 ${savingChecklistId === item.id ? 'opacity-70 cursor-not-allowed' : ''}`}
+                        >
+                          {savingChecklistId === item.id ? "Saving..." : "Save"}
+                        </button>
+                      </div>
+
+                      <div className="text-[9px] text-muted-foreground font-mono">
+                        Last updated: {new Date(item.last_updated).toLocaleString()}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 self-start md:self-center">
+                      <button
+                        onClick={() => handleUpdateChecklistStatus(item, 'available')}
+                        disabled={updatingChecklistStatusKey === `${item.id}-available`}
+                        className={`px-2.5 py-1 rounded-xl text-[10px] font-semibold border transition ${
+                          item.status === 'available' ? 'bg-emerald text-white border-transparent' : 'bg-card border-border hover:bg-black/5 dark:hover:bg-white/5 text-muted-foreground'
+                        } ${updatingChecklistStatusKey === `${item.id}-available` ? 'opacity-70 cursor-not-allowed' : ''}`}
+                      >
+                        {updatingChecklistStatusKey === `${item.id}-available` ? 'Updating...' : 'Available'}
+                      </button>
+                      <button
+                        onClick={() => handleUpdateChecklistStatus(item, 'needs update')}
+                        disabled={updatingChecklistStatusKey === `${item.id}-needs update`}
+                        className={`px-2.5 py-1 rounded-xl text-[10px] font-semibold border transition ${
+                          item.status === 'needs update' ? 'bg-amber-500 text-white border-transparent' : 'bg-card border-border hover:bg-black/5 dark:hover:bg-white/5 text-muted-foreground'
+                        } ${updatingChecklistStatusKey === `${item.id}-needs update` ? 'opacity-70 cursor-not-allowed' : ''}`}
+                      >
+                        {updatingChecklistStatusKey === `${item.id}-needs update` ? 'Updating...' : 'Needs Update'}
+                      </button>
+                      <button
+                        onClick={() => handleUpdateChecklistStatus(item, 'missing')}
+                        disabled={updatingChecklistStatusKey === `${item.id}-missing`}
+                        className={`px-2.5 py-1 rounded-xl text-[10px] font-semibold border transition ${
+                          item.status === 'missing' ? 'bg-red-500 text-white border-transparent' : 'bg-card border-border hover:bg-black/5 dark:hover:bg-white/5 text-muted-foreground'
+                        } ${updatingChecklistStatusKey === `${item.id}-missing` ? 'opacity-70 cursor-not-allowed' : ''}`}
+                      >
+                        {updatingChecklistStatusKey === `${item.id}-missing` ? 'Updating...' : 'Missing'}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          <div className="space-y-6">
+            
+            <div className="bg-card border border-border rounded-[24px] p-5 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-border pb-3">
+                <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
+                  <FileText className="size-4.5 text-indigo-soft" />
+                  Coordination Notes
+                </h2>
+                <span className="text-[10px] bg-black/5 dark:bg-white/10 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">
+                  Log
+                </span>
+              </div>
+
+              <form onSubmit={handleAddNote} className="space-y-3 bg-secondary/35 p-3 rounded-2xl border border-border">
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground">Category</label>
+                  <select
+                    value={noteCategory}
+                    onChange={(e) => setNoteCategory(e.target.value)}
+                    className="w-full bg-black/5 dark:bg-white/5 border border-border rounded-xl px-2.5 py-1.5 text-xs text-foreground outline-none focus:border-indigo-soft/40"
+                  >
+                    {categories.map(cat => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase font-mono tracking-wider text-muted-foreground">Note details</label>
+                  <textarea
+                    required
+                    value={noteText}
+                    onChange={(e) => setNoteText(e.target.value)}
+                    placeholder="Enter call notes, hospice details, or followups..."
+                    rows={3}
+                    className="w-full bg-black/5 dark:bg-white/5 border border-border rounded-xl px-2.5 py-1.5 text-xs text-foreground outline-none focus:border-indigo-soft/40 resize-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={savingNote}
+                  className={`w-full flex items-center justify-center gap-2 bg-indigo-soft hover:bg-indigo-soft/90 text-white font-medium py-1.5 rounded-xl text-xs transition ${savingNote ? 'opacity-70 cursor-not-allowed' : ''}`}
+                >
+                  <Plus className="size-3.5" />
+                  {savingNote ? "Adding Note..." : "Add Note"}
+                </button>
+              </form>
+
+              <div className="space-y-3 max-h-[350px] overflow-y-auto pr-1">
+                {notes.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground text-xs">
+                    No coordination notes recorded yet.
+                  </div>
+                ) : (
+                  notes.map((note) => (
+                    <div key={note.id} className="p-3.5 rounded-2xl bg-secondary/30 border border-border space-y-2 relative group hover:border-border/80 transition">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-mono uppercase bg-indigo-soft/10 text-indigo-soft border border-indigo-soft/20 px-2 py-0.5 rounded-full font-semibold">
+                          {note.category}
+                        </span>
+                        
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={() => handleStartEditNote(note)}
+                            className="text-muted-foreground hover:text-foreground transition p-0.5"
+                          >
+                            <Pencil className="size-3" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteNote(note.id)}
+                            disabled={deletingNoteId === note.id}
+                            className={`text-muted-foreground hover:text-red-400 transition p-0.5 ${deletingNoteId === note.id ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            title="Delete note"
+                          >
+                            {deletingNoteId === note.id ? (
+                              <span className="text-[9px] font-mono">...</span>
+                            ) : (
+                              <Trash2 className="size-3" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+
+                      {editingNoteId === note.id ? (
+                        <div className="space-y-2 mt-1">
+                          <select
+                            value={editingNoteCategory}
+                            onChange={(e) => setEditingNoteCategory(e.target.value)}
+                            className="w-full bg-black/5 dark:bg-white/5 border border-border rounded-lg px-2 py-1 text-xs text-foreground outline-none"
+                          >
+                            {categories.map(cat => (
+                              <option key={cat} value={cat}>{cat}</option>
+                            ))}
+                          </select>
+                          <textarea
+                            value={editingNoteText}
+                            onChange={(e) => setEditingNoteText(e.target.value)}
+                            className="w-full bg-black/5 dark:bg-white/5 border border-border rounded-lg p-2 text-xs text-foreground outline-none"
+                            rows={2}
+                          />
+                          <div className="flex items-center gap-1.5 justify-end">
+                            <button
+                              onClick={() => setEditingNoteId(null)}
+                              className="px-2 py-1 rounded-lg text-xs bg-black/5 dark:bg-white/5 text-muted-foreground hover:bg-black/10 transition"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              onClick={() => handleUpdateNote(note.id)}
+                              disabled={savingNote}
+                              className={`px-2.5 py-1 rounded-lg text-xs bg-indigo-soft text-white hover:bg-indigo-soft/90 transition ${savingNote ? 'opacity-70 cursor-not-allowed' : ''}`}
+                            >
+                              {savingNote ? "Saving..." : "Save"}
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-xs text-foreground leading-relaxed whitespace-pre-wrap">{note.note}</p>
+                      )}
+
+                      <div className="text-[8px] text-muted-foreground font-mono flex items-center justify-between border-t border-border/40 pt-1.5 mt-2">
+                        <span>Updated: {new Date(note.updated_at || note.created_at).toLocaleDateString()}</span>
+                        <span>{new Date(note.updated_at || note.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            <div className="bg-card border border-border rounded-[24px] p-5 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-border pb-3">
+                <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
+                  <Mic className="size-4.5 text-indigo-soft" />
+                  Recent Voice Check-ins
+                </h2>
+                <span className="text-[10px] bg-black/5 dark:bg-white/10 px-2 py-0.5 rounded-full font-mono font-semibold uppercase">
+                  AI Summary
+                </span>
+              </div>
+
+              <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                {voiceCheckins.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground text-xs">
+                    No voice check-ins recorded for this patient.
+                  </div>
+                ) : (
+                  voiceCheckins.map((vc) => {
+                    const isConcern = vc.sentiment === 'concerning' || vc.sentiment === 'negative';
+                    return (
+                      <div key={vc.id} className="p-3.5 rounded-2xl bg-secondary/30 border border-border space-y-2">
+                        <div className="flex items-center justify-between text-[10px] font-mono">
+                          <span className="text-muted-foreground">{vc.date || 'Today'} at {vc.time}</span>
+                          <span className={`font-semibold uppercase ${isConcern ? 'text-red-400' : 'text-emerald-soft'}`}>
+                            {vc.sentiment}
+                          </span>
+                        </div>
+                        
+                        <blockquote className="text-xs italic text-muted-foreground border-l-2 border-border pl-2.5 py-0.5">
+                          "{vc.transcript}"
+                        </blockquote>
+
+                        <p className="text-xs text-foreground font-sans leading-relaxed bg-black/[0.02] dark:bg-white/[0.02] border border-border/40 p-2.5 rounded-xl">
+                          <strong>AI Summary:</strong> {vc.aiSummary || vc.caregiverSummary}
+                        </p>
+
+                        {vc.flags && vc.flags.length > 0 && (
+                          <div className="flex flex-wrap gap-1 mt-1.5">
+                            {vc.flags.map((flag: string) => (
+                              <span key={flag} className="text-[8px] font-mono font-semibold uppercase bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded-full">
+                                {flag.replace(/_/g, " ")}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -1829,7 +2652,7 @@ const CareTeamPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: 
   };
 
   const noteCatColors: Record<string, string> = {
-    General: "bg-white/5 text-muted-foreground border-border",
+    General: "bg-black/5 dark:bg-white/5 text-muted-foreground border-border",
     Medication: "bg-indigo/15 text-indigo-soft border-indigo/20",
     Behavior: "bg-amber-500/15 text-warm border-amber-500/20",
     Sleep: "bg-sky-500/15 text-sky-300 border-sky-500/20",
@@ -1861,23 +2684,23 @@ const CareTeamPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: 
             </div>
 
             {showForm && (
-              <form onSubmit={handleAdd} className="bg-white/[0.02] border border-border rounded-xl p-3.5 space-y-2.5">
+              <form onSubmit={handleAdd} className="bg-black/[0.02] dark:bg-white/[0.02] border border-border rounded-xl p-3.5 space-y-2.5">
                 <input required type="text" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Full name *"
-                  className="w-full bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+                  className="w-full bg-black/5 dark:bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
                 <input required type="text" value={newRole} onChange={e => setNewRole(e.target.value)} placeholder="Role (e.g. Nurse) *"
-                  className="w-full bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+                  className="w-full bg-black/5 dark:bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
                 <select value={newRelationship} onChange={e => setNewRelationship(e.target.value)}
-                  className="w-full bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent text-foreground [&>option]:bg-[#1e2261]">
+                  className="w-full bg-black/5 dark:bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent text-foreground [&>option]:bg-background">
                   <option value="Family">Family</option>
                   <option value="Provider">Provider</option>
                   <option value="Professional">Professional</option>
                   <option value="Other">Other</option>
                 </select>
                 <input type="tel" value={newPhone} onChange={e => setNewPhone(e.target.value)} placeholder="Phone number"
-                  className="w-full bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+                  className="w-full bg-black/5 dark:bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
                 <input type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="Email address"
-                  className="w-full bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
-                <button type="submit" className="w-full bg-emerald/20 text-emerald-soft border border-emerald/20 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald/30 transition cursor-pointer">
+                  className="w-full bg-black/5 dark:bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+                <button type="submit" className="w-full bg-primary text-primary-foreground border border-transparent py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald/30 transition cursor-pointer">
                   Save Member
                 </button>
               </form>
@@ -1887,9 +2710,9 @@ const CareTeamPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: 
               {loading ? (
                 <div className="text-xs text-muted-foreground text-center py-4">Loading team...</div>
               ) : team.map((m: any) => (
-                <div key={m.id} className="bg-white/[0.02] border border-border rounded-xl p-3 flex items-center justify-between gap-3">
+                <div key={m.id} className="bg-black/[0.02] dark:bg-white/[0.02] border border-border rounded-xl p-3 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <img src={m.avatar} alt={m.name} className="size-8 rounded-full object-cover ring-1 ring-white/10 shrink-0" />
+                    <img src={m.avatar} alt={m.name} className="size-8 rounded-full object-cover ring-1 ring-black/10 dark:ring-white/10 shrink-0" />
                     <div className="min-w-0">
                       <div className="text-xs text-foreground font-medium truncate">{m.name}</div>
                       <div className="text-[10px] text-muted-foreground truncate">{m.role} · {m.relationship}</div>
@@ -1897,11 +2720,11 @@ const CareTeamPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: 
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
                     {m.phone && (
-                      <a href={`tel:${m.phone}`} className="size-6 rounded bg-white/5 grid place-items-center text-muted-foreground hover:text-emerald hover:bg-emerald/10 transition">
+                      <a href={`tel:${m.phone}`} className="size-6 rounded bg-black/5 dark:bg-white/5 grid place-items-center text-muted-foreground hover:text-emerald hover:bg-emerald/10 transition">
                         <Phone className="size-3" />
                       </a>
                     )}
-                    <button onClick={() => handleDelete(m.id)} className="size-6 rounded bg-white/5 grid place-items-center text-muted-foreground hover:text-red-400 hover:bg-red-500/10 transition cursor-pointer">
+                    <button onClick={() => handleDelete(m.id)} className="size-6 rounded bg-black/5 dark:bg-white/5 grid place-items-center text-muted-foreground hover:text-red-400 hover:bg-red-500/10 transition cursor-pointer">
                       <Trash2 className="size-3" />
                     </button>
                   </div>
@@ -1920,12 +2743,12 @@ const CareTeamPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: 
             </h3>
 
             {/* Note submission form */}
-            <form onSubmit={handleAddNote} className="space-y-3 bg-white/[0.02] border border-border rounded-xl p-3.5">
-              <div className="flex gap-2">
+            <form onSubmit={handleAddNote} className="space-y-3 bg-black/[0.02] dark:bg-white/[0.02] border border-border rounded-xl p-3.5">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <select
                   value={noteCategory}
                   onChange={e => setNoteCategory(e.target.value)}
-                  className="bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent text-foreground shrink-0 font-medium [&>option]:bg-[#1e2261]"
+                  className="bg-black/5 dark:bg-white/5 rounded-lg px-2.5 py-1.5 text-xs outline-none border border-transparent text-foreground shrink-0 font-medium [&>option]:bg-background"
                 >
                   <option value="General">General</option>
                   <option value="Medication">Medication</option>
@@ -1940,7 +2763,7 @@ const CareTeamPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: 
                   value={noteContent}
                   onChange={e => setNoteContent(e.target.value)}
                   placeholder="Share an update, observation, or instruction with the team..."
-                  className="flex-1 bg-white/5 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
+                  className="flex-1 bg-black/5 dark:bg-white/5 rounded-lg px-3 py-1.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
                 />
                 <button
                   type="submit"
@@ -1959,7 +2782,7 @@ const CareTeamPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: 
               ) : notes.length === 0 ? (
                 <div className="text-xs text-muted-foreground text-center py-8">No caregiver notes recorded. Keep the team synced by adding a note.</div>
               ) : notes.map((note: any) => (
-                <div key={note.id} className="bg-white/[0.02] border border-border rounded-xl p-3.5 space-y-2">
+                <div key={note.id} className="bg-black/[0.02] dark:bg-white/[0.02] border border-border rounded-xl p-3.5 space-y-2">
                   <div className="flex items-center justify-between text-[10px] text-muted-foreground font-mono">
                     <div className="flex items-center gap-2">
                       <span className="font-semibold text-muted-foreground">{note.author}</span>
@@ -1992,7 +2815,7 @@ const CareTeamPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient: 
                   </div>
                   <div className="text-right shrink-0">
                     <span className="text-[9px] text-muted-foreground block font-mono">{item.time}</span>
-                    <span className="text-[8px] uppercase font-mono px-1.5 py-0.5 rounded bg-white/5 text-muted-foreground mt-1 inline-block">
+                    <span className="text-[8px] uppercase font-mono px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/5 text-muted-foreground mt-1 inline-block">
                       {item.type}
                     </span>
                   </div>
@@ -2113,7 +2936,7 @@ const ReportsPanel = ({ patient }: { patient: any }) => {
           </div>
           <p className="text-xs text-muted-foreground font-sans">Comprehensive JSON export with medications, alerts, wellness history, voice check-ins, care plans, and care team.</p>
           <button onClick={downloadReport}
-            className="w-full inline-flex items-center justify-center gap-2 bg-emerald/20 text-emerald-soft border border-emerald/20 py-2.5 rounded-xl text-sm font-semibold hover:bg-emerald/30 transition cursor-pointer">
+            className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground border border-transparent py-2.5 rounded-xl text-sm font-semibold hover:bg-emerald/30 transition cursor-pointer">
             <Download className="size-4" /> Download Report
           </button>
         </div>
@@ -2135,15 +2958,15 @@ const ReportsPanel = ({ patient }: { patient: any }) => {
       {showSummaryModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm font-sans">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-[#1e2261] border border-border rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh]">
-            <div className="p-4 border-b border-border flex items-center justify-between bg-white/[0.02]">
+            <div className="p-4 border-b border-border flex items-center justify-between bg-black/[0.02] dark:bg-white/[0.02]">
               <h3 className="text-foreground font-medium flex items-center gap-2"><Stethoscope className="size-4 text-indigo-soft" /> 30-Day Doctor Visit Summary</h3>
               <button onClick={() => setShowSummaryModal(false)} className="text-muted-foreground hover:text-foreground transition"><X className="size-5" /></button>
             </div>
             <div className="p-6 overflow-y-auto whitespace-pre-wrap text-sm text-muted-foreground leading-relaxed font-sans bg-white/[0.01]">
               {summaryContent}
             </div>
-            <div className="p-4 border-t border-border bg-white/[0.02] flex justify-end gap-3">
-              <button onClick={() => { navigator.clipboard.writeText(summaryContent); toast.success("Copied to clipboard!"); }} className="px-4 py-2 bg-white/5 text-foreground text-sm font-medium rounded-xl hover:bg-white/10 transition">Copy to Clipboard</button>
+            <div className="p-4 border-t border-border bg-black/[0.02] dark:bg-white/[0.02] flex justify-end gap-3">
+              <button onClick={() => { navigator.clipboard.writeText(summaryContent); toast.success("Copied to clipboard!"); }} className="px-4 py-2 bg-black/5 dark:bg-white/5 text-foreground text-sm font-medium rounded-xl hover:bg-black/10 dark:bg-white/10 transition">Copy to Clipboard</button>
               <button onClick={() => window.print()} className="px-4 py-2 bg-indigo text-foreground text-sm font-medium rounded-xl hover:bg-indigo-deep transition flex items-center gap-2"><Download className="size-4" /> Print / Save PDF</button>
             </div>
           </motion.div>
@@ -2154,16 +2977,16 @@ const ReportsPanel = ({ patient }: { patient: any }) => {
       {fhirPreview && (
         <div className="rounded-[22px] rounded-bl-sm bg-secondary border-none p-5 space-y-3">
           <div className="text-xs text-muted-foreground font-mono uppercase tracking-widest">FHIR Bundle Preview</div>
-          <div className="grid grid-cols-3 gap-3">
-            <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
               <div className="text-[10px] text-muted-foreground font-mono uppercase">Bundle Type</div>
               <div className="text-sm text-foreground font-medium mt-1">{fhirPreview.type || "collection"}</div>
             </div>
-            <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
               <div className="text-[10px] text-muted-foreground font-mono uppercase">Resources</div>
               <div className="text-sm text-foreground font-medium mt-1">{entryCount} entries</div>
             </div>
-            <div className="bg-white/[0.03] rounded-xl p-3 border border-border">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
               <div className="text-[10px] text-muted-foreground font-mono uppercase">Resource Types</div>
               <div className="text-sm text-foreground font-medium mt-1">{uniqueTypes.length} types</div>
             </div>
@@ -2183,7 +3006,22 @@ const ReportsPanel = ({ patient }: { patient: any }) => {
 // SETTINGS
 // ═════════════════════════════════════════════════════════════════════
 
-const SettingsPanel = ({ patient, onUpdatePatient }: { patient: any; onUpdatePatient: (updates: any) => Promise<void> }) => {
+const SettingsPanel = ({ patient, onUpdatePatient, fetchPatients, setPatient }: { patient: any; onUpdatePatient: (updates: any) => Promise<void>; fetchPatients: () => Promise<void>; setPatient: (p: any) => void }) => {
+  const handleDeletePatient = async () => {
+    if (!confirm(`Are you absolutely sure you want to delete ${patient.name}? This action cannot be undone.`)) return;
+    try {
+      const res = await apiFetch(`/api/patients/${patient.id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(data.message);
+        await fetchPatients();
+        setPatient(data.patient || null);
+      } else {
+        toast.error(data.message);
+      }
+    } catch { toast.error("Network error"); }
+  };
+
   const [patientName, setPatientName] = useState(patient?.name || "");
   const [patientAge, setPatientAge] = useState(patient?.age?.toString() || "");
   const [patientImage, setPatientImage] = useState(patient?.image || "");
@@ -2225,20 +3063,20 @@ const SettingsPanel = ({ patient, onUpdatePatient }: { patient: any; onUpdatePat
       <div className="rounded-[22px] rounded-bl-sm bg-secondary border-none p-5 space-y-4">
         <h3 className="text-foreground text-sm font-medium flex items-center gap-2"><Pencil className="size-4 text-indigo-soft" /> Patient Profile</h3>
         <form onSubmit={handleSavePatient} className="space-y-3 font-sans">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-[10px] uppercase tracking-wider font-mono text-muted-foreground mb-1">Name</label>
-              <input required type="text" value={patientName} onChange={e => setPatientName(e.target.value)}
-                className="w-full bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+              <input id="patientNameInput" required type="text" value={patientName} onChange={e => setPatientName(e.target.value)}
+                className="w-full bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-wider font-mono text-muted-foreground mb-1">Age</label>
               <input required type="number" value={patientAge} onChange={e => setPatientAge(e.target.value)}
-                className="w-full bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
+                className="w-full bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground" />
             </div>
           </div>
           <button type="submit" disabled={saving}
-            className="inline-flex items-center gap-2 bg-emerald/20 text-emerald-soft border border-emerald/20 px-4 py-2 rounded-xl text-xs font-medium hover:bg-emerald/30 transition cursor-pointer">
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground border border-transparent px-4 py-2 rounded-xl text-xs font-medium hover:bg-emerald/30 transition cursor-pointer">
             <Save className="size-3.5" /> {saving ? "Saving..." : "Save"}
           </button>
         </form>
@@ -2254,7 +3092,7 @@ const SettingsPanel = ({ patient, onUpdatePatient }: { patient: any; onUpdatePat
               { label: "Email Digest", key: "emailDigest", cat: "notifications", val: settings.notifications?.emailDigest },
               { label: "SMS Alerts", key: "smsAlerts", cat: "notifications", val: settings.notifications?.smsAlerts },
             ].map(item => (
-              <div key={item.key} className="flex items-center justify-between bg-white/[0.03] p-3 rounded-xl border border-border">
+              <div key={item.key} className="flex items-center justify-between bg-black/[0.03] dark:bg-white/[0.03] p-3 rounded-xl border border-border">
                 <span className="text-sm text-muted-foreground">{item.label}</span>
                 <button onClick={() => handleToggle(item.cat, item.key, !item.val)}
                   className={`relative w-10 h-5 rounded-full transition cursor-pointer ${item.val ? "bg-emerald" : "bg-white/15"}`}>
@@ -2372,29 +3210,29 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
             )}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div className="bg-white/[0.03] rounded-xl p-2.5 border border-border">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-2.5 border border-border">
               <div className="text-[9px] text-muted-foreground font-mono uppercase">Meals Logged</div>
               <div className="text-sm text-foreground font-medium mt-0.5">
                 {mealsLogged.length > 0 ? mealsLogged.join(", ") : "None"}
               </div>
             </div>
-            <div className="bg-white/[0.03] rounded-xl p-2.5 border border-border">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-2.5 border border-border">
               <div className="text-[9px] text-muted-foreground font-mono uppercase">Hydration</div>
               <div className="text-sm font-medium mt-0.5">
                 <span className={waterIntake >= 8 ? "text-emerald-soft" : waterIntake >= 4 ? "text-warm" : "text-red-400"}>
                   {waterIntake} / 8 cups
                 </span>
               </div>
-              <div className="h-1 rounded-full bg-white/5 mt-1 overflow-hidden">
+              <div className="h-1 rounded-full bg-black/5 dark:bg-white/5 mt-1 overflow-hidden">
                 <div className={`h-full rounded-full transition-all ${waterIntake >= 8 ? "bg-emerald" : waterIntake >= 4 ? "bg-amber-500" : "bg-red-500"}`}
                   style={{ width: `${hydrationPct}%` }} />
               </div>
             </div>
-            <div className="bg-white/[0.03] rounded-xl p-2.5 border border-border">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-2.5 border border-border">
               <div className="text-[9px] text-muted-foreground font-mono uppercase">Appetite</div>
               <div className="text-sm text-foreground font-medium mt-0.5">{appetiteScore} / 5</div>
             </div>
-            <div className="bg-white/[0.03] rounded-xl p-2.5 border border-border">
+            <div className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-2.5 border border-border">
               <div className="text-[9px] text-muted-foreground font-mono uppercase">Weight</div>
               <div className="text-sm text-foreground font-medium mt-0.5">{weight ? `${weight} lbs` : "Not recorded"}</div>
             </div>
@@ -2416,7 +3254,7 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
                 value={breakfast}
                 onChange={e => setBreakfast(e.target.value)}
                 placeholder="e.g. Oatmeal with bananas, orange juice"
-                className="w-full bg-white/5 rounded-xl px-3.5 py-2.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
+                className="w-full bg-black/5 dark:bg-white/5 rounded-xl px-3.5 py-2.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
               />
             </div>
             <div>
@@ -2426,7 +3264,7 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
                 value={lunch}
                 onChange={e => setLunch(e.target.value)}
                 placeholder="e.g. Chicken salad wrap, apple slices"
-                className="w-full bg-white/5 rounded-xl px-3.5 py-2.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
+                className="w-full bg-black/5 dark:bg-white/5 rounded-xl px-3.5 py-2.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
               />
             </div>
             <div>
@@ -2436,7 +3274,7 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
                 value={dinner}
                 onChange={e => setDinner(e.target.value)}
                 placeholder="e.g. Baked salmon, broccoli, brown rice"
-                className="w-full bg-white/5 rounded-xl px-3.5 py-2.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
+                className="w-full bg-black/5 dark:bg-white/5 rounded-xl px-3.5 py-2.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
               />
             </div>
             <div>
@@ -2446,7 +3284,7 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
                 value={snacks}
                 onChange={e => setSnacks(e.target.value)}
                 placeholder="e.g. Greek yogurt, handful of almonds"
-                className="w-full bg-white/5 rounded-xl px-3.5 py-2.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
+                className="w-full bg-black/5 dark:bg-white/5 rounded-xl px-3.5 py-2.5 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground"
               />
             </div>
           </div>
@@ -2460,7 +3298,7 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
               <h3 className="text-foreground text-sm font-semibold flex items-center gap-2">
                 <GlassWater className="size-4 text-indigo-soft" /> Hydration Tracker
               </h3>
-              <div className="flex items-center gap-4 bg-white/[0.02] p-3 rounded-xl border border-border">
+              <div className="flex items-center gap-4 bg-black/[0.02] dark:bg-white/[0.02] p-3 rounded-xl border border-border">
                 <div className="flex-1">
                   <div className="text-sm text-foreground font-medium">{waterIntake} cups</div>
                   <div className="text-[10px] text-muted-foreground">Daily goal: 8 cups (64 oz)</div>
@@ -2469,7 +3307,7 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
                   <button
                     type="button"
                     onClick={() => setWaterIntake(w => Math.max(0, w - 1))}
-                    className="size-8 rounded-lg bg-white/5 grid place-items-center text-foreground font-bold hover:bg-white/10 transition cursor-pointer"
+                    className="size-8 rounded-lg bg-black/5 dark:bg-white/5 grid place-items-center text-foreground font-bold hover:bg-black/10 dark:bg-white/10 transition cursor-pointer"
                   >
                     -
                   </button>
@@ -2489,7 +3327,7 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
               <h3 className="text-foreground text-sm font-semibold flex items-center gap-2">
                 <Coffee className="size-4 text-emerald-soft" /> Appetite Score
               </h3>
-              <div className="bg-white/[0.02] p-3 rounded-xl border border-border space-y-2">
+              <div className="bg-black/[0.02] dark:bg-white/[0.02] p-3 rounded-xl border border-border space-y-2">
                 <div className="flex justify-between text-xs text-muted-foreground">
                   <span>Poor (1)</span>
                   <span className="font-semibold text-foreground">Score: {appetiteScore}/5</span>
@@ -2511,14 +3349,14 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
               <h3 className="text-foreground text-sm font-semibold flex items-center gap-2">
                 <Scale className="size-4 text-indigo-soft" /> Weight Tracker
               </h3>
-              <div className="flex items-center gap-3 bg-white/[0.02] p-3 rounded-xl border border-border">
+              <div className="flex items-center gap-3 bg-black/[0.02] dark:bg-white/[0.02] p-3 rounded-xl border border-border">
                 <input
                   type="number"
                   step="0.1"
                   value={weight}
                   onChange={e => setWeight(e.target.value)}
                   placeholder="e.g. 134.2"
-                  className="w-28 bg-white/5 rounded-lg px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground font-sans font-semibold"
+                  className="w-28 bg-black/5 dark:bg-white/5 rounded-lg px-3 py-2 text-xs outline-none border border-transparent focus:border-indigo-soft/40 text-foreground font-sans font-semibold"
                 />
                 <span className="text-xs text-muted-foreground">lbs (leave 0 or empty if not weighed today)</span>
               </div>
@@ -2550,7 +3388,7 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
               const meals = [log.breakfast && "B", log.lunch && "L", log.dinner && "D", log.snacks && "S"].filter(Boolean);
               const hPct = Math.min(100, Math.round(((log.waterIntake || 0) / 8) * 100));
               return (
-                <div key={log.id || log.date} className="bg-white/[0.03] rounded-xl p-3 border border-border">
+                <div key={log.id || log.date} className="bg-black/[0.03] dark:bg-white/[0.03] rounded-xl p-3 border border-border">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] text-muted-foreground font-mono">{log.date}</span>
                     <div className="flex items-center gap-3">
@@ -2572,16 +3410,16 @@ const NutritionPanel = ({ patient, fetchPatient }: { patient: any; fetchPatient:
                   {/* Meal details row */}
                   <div className="flex flex-wrap gap-2 mt-1.5">
                     {log.breakfast && (
-                      <span className="text-[10px] text-muted-foreground bg-white/5 px-2 py-0.5 rounded-lg">🌅 {log.breakfast}</span>
+                      <span className="text-[10px] text-muted-foreground bg-black/5 dark:bg-white/5 px-2 py-0.5 rounded-lg">🌅 {log.breakfast}</span>
                     )}
                     {log.lunch && (
-                      <span className="text-[10px] text-muted-foreground bg-white/5 px-2 py-0.5 rounded-lg">☀️ {log.lunch}</span>
+                      <span className="text-[10px] text-muted-foreground bg-black/5 dark:bg-white/5 px-2 py-0.5 rounded-lg">☀️ {log.lunch}</span>
                     )}
                     {log.dinner && (
-                      <span className="text-[10px] text-muted-foreground bg-white/5 px-2 py-0.5 rounded-lg">🌙 {log.dinner}</span>
+                      <span className="text-[10px] text-muted-foreground bg-black/5 dark:bg-white/5 px-2 py-0.5 rounded-lg">🌙 {log.dinner}</span>
                     )}
                     {log.snacks && (
-                      <span className="text-[10px] text-muted-foreground bg-white/5 px-2 py-0.5 rounded-lg">🍎 {log.snacks}</span>
+                      <span className="text-[10px] text-muted-foreground bg-black/5 dark:bg-white/5 px-2 py-0.5 rounded-lg">🍎 {log.snacks}</span>
                     )}
                   </div>
                 </div>
@@ -2641,7 +3479,7 @@ const AuditLogsPanel = () => {
               </thead>
               <tbody className="divide-y divide-white/5">
                 {logs.map((log: any) => (
-                  <tr key={log.id} className="hover:bg-white/[0.02] transition">
+                  <tr key={log.id} className="hover:bg-black/[0.02] dark:bg-white/[0.02] transition">
                     <td className="py-2.5 px-3 font-mono text-muted-foreground">
                       {new Date(log.timestamp).toLocaleString()}
                     </td>
@@ -2688,6 +3526,7 @@ export default function App() {
   const [newPatientCondition, setNewPatientCondition] = useState("");
   const [newPatientNotes, setNewPatientNotes] = useState("");
   const [isSubmittingPatient, setIsSubmittingPatient] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const createDemoUser = () => ({
     id: "dev",
@@ -2777,8 +3616,14 @@ export default function App() {
     try {
       const res = await apiFetch("/api/patients");
       const data = await res.json();
+
+      console.log("Patients from API:", data);
+      console.log("Patient count:", data.patients?.length);
+
       setPatientsList(data.patients || []);
-    } catch { }
+    } catch (err) {
+      console.error("fetchPatients error:", err);
+    }
   };
 
   useEffect(() => {
@@ -2849,13 +3694,47 @@ export default function App() {
       const data = await res.json();
       if (data.success) {
         toast.success(data.message);
-        await fetchPatient();
+        setPatient(data.patient);
         await fetchPatients();
-        setShowPatientSelector(false);
+        setShowPatientSelector(false); // Close dropdown on success
       }
     } catch {
       toast.error("Failed to switch patient.");
     }
+  };
+
+  const handleEditPatientFromDropdown = async (id: string) => {
+    try {
+      const res = await apiFetch(`/api/patients/${id}/activate`, { method: "POST" });
+      const data = await res.json();
+      if (data.success) {
+        setPatient(data.patient);
+        await fetchPatients();
+        setShowPatientSelector(false);
+        setPage("Settings");
+      }
+    } catch {
+      toast.error("Failed to edit patient.");
+    }
+  };
+
+  const handleDeletePatientFromDropdown = async (id: string, name: string) => {
+    if (!patientsList || !Array.isArray(patientsList) || patientsList.length <= 1) {
+      toast.error("Cannot delete the last patient.");
+      return;
+    }
+    if (!confirm(`Are you absolutely sure you want to delete ${name}? This action cannot be undone.`)) return;
+    try {
+      const res = await apiFetch(`/api/patients/${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(data.message);
+        if (data.patient) setPatient(data.patient);
+        if (data.patients) setPatientsList(data.patients);
+      } else {
+        toast.error(data.message);
+      }
+    } catch { toast.error("Network error deleting patient."); }
   };
 
   const handleAddPatient = async (e: React.FormEvent) => {
@@ -2922,6 +3801,7 @@ export default function App() {
 
   const navItems = [
     { icon: Home, label: "Dashboard" },
+    { icon: ClipboardList, label: "Care Coordination Hub" },
     { icon: Mic, label: "Voice Check-In" },
     { icon: Brain, label: "Rocky AI" },
     { icon: Pill, label: "Medications" },
@@ -2969,7 +3849,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background text-foreground flex font-sans overflow-hidden">
       {/* Left Column: Conversations List */}
-      <aside className="w-[320px] shrink-0 border-r border-border flex flex-col h-screen bg-card">
+      <aside className={`${isMobileMenuOpen ? "fixed inset-0 z-50 flex w-full" : "hidden"} md:flex md:w-[320px] md:relative shrink-0 border-r border-border flex-col h-screen bg-card`}>
         {/* Header */}
         <div className="px-4 py-3 flex items-center justify-between border-b border-border shrink-0 mt-2">
           <button className="text-primary font-semibold text-[17px] cursor-pointer flex items-center gap-0.5" onClick={() => setShowPatientSelector(!showPatientSelector)}>
@@ -2983,8 +3863,11 @@ export default function App() {
             >
               {theme === "dark" ? <Sun className="size-4" /> : <MoonStar className="size-4" />}
             </button>
-            <button className="text-primary cursor-pointer" onClick={() => setShowAddPatientModal(true)}>
-              <Edit3 className="size-5" />
+            <button className="text-primary cursor-pointer rounded-full border border-border bg-card/80 px-3 py-1.5 transition hover:bg-muted/70 flex items-center gap-1.5" onClick={() => setShowAddPatientModal(true)}>
+              <Plus className="size-4" /> <span className="text-xs font-semibold">New</span>
+            </button>
+            <button className="md:hidden text-primary cursor-pointer rounded-full border border-border bg-card/80 p-2 transition hover:bg-muted/70" onClick={() => setIsMobileMenuOpen(false)}>
+              <X className="size-4" />
             </button>
           </div>
         </div>
@@ -2994,12 +3877,24 @@ export default function App() {
           <div className="mx-4 mt-3 bg-card rounded-xl overflow-hidden flex flex-col divide-y divide-border shrink-0">
             <div className="max-h-48 overflow-y-auto divide-y divide-border">
               {patientsList.map(p => (
-                <button key={p.id} onClick={() => handleSwitchPatient(p.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 transition cursor-pointer text-left`}>
-                  <img src={p.image} alt="" className="size-8 rounded-full object-cover" />
-                  <span className={`text-base flex-1 ${p.id === patient?.id ? "text-foreground font-semibold" : "text-foreground"}`}>{p.name}</span>
-                  {p.id === patient?.id && <Check className="size-5 text-primary" />}
-                </button>
+                <div key={p.id} className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-black/5 dark:hover:bg-white/5 transition group">
+                  <button onClick={() => handleSwitchPatient(p.id)} className="flex items-center gap-3 flex-1 text-left cursor-pointer">
+                    <img src={p.image} alt="" className="size-8 rounded-full object-cover" />
+                    <span className={`text-base flex-1 ${p.id === patient?.id ? "text-foreground font-semibold" : "text-foreground"}`}>{p.name}</span>
+                    {p.id === patient?.id && <Check className="size-5 text-primary" />}
+                  </button>
+                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button onClick={(e) => { 
+                      e.stopPropagation(); 
+                      handleEditPatientFromDropdown(p.id); 
+                    }} className="p-1.5 text-muted-foreground hover:text-primary transition rounded-full hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer">
+                      <Pencil className="size-3.5" />
+                    </button>
+                    <button onClick={(e) => { e.stopPropagation(); handleDeletePatientFromDropdown(p.id, p.name); }} className="p-1.5 text-muted-foreground hover:text-red-500 transition rounded-full hover:bg-red-500/10 cursor-pointer">
+                      <Trash2 className="size-3.5" />
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -3012,9 +3907,9 @@ export default function App() {
           {navItems.map(item => {
             const isActive = page === item.label;
             return (
-              <button key={item.label} onClick={() => { setPage(item.label); setShowPatientSelector(false); }}
-                className={`w-full flex items-center gap-3 px-2 py-2 rounded-xl cursor-pointer transition text-left ${isActive ? "bg-white/10 backdrop-blur-sm text-foreground shadow-[0_0_0_1px_rgba(255,255,255,0.08)]" : "hover:bg-white/5 text-foreground"}`}>
-                <div className={`size-11 rounded-full flex items-center justify-center shrink-0 ${isActive ? "bg-white/10 border border-white/15 text-foreground" : "bg-card border border-border text-muted-foreground"}`}>
+              <button key={item.label} onClick={() => { setPage(item.label); setShowPatientSelector(false); setIsMobileMenuOpen(false); }}
+                className={`w-full flex items-center gap-3 px-2 py-2 rounded-xl cursor-pointer transition text-left ${isActive ? "bg-black/5 dark:bg-white/10 backdrop-blur-sm text-foreground shadow-[0_0_0_1px_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08)]" : "hover:bg-black/5 dark:hover:bg-white/5 text-foreground"}`}>
+                <div className={`size-11 rounded-full flex items-center justify-center shrink-0 ${isActive ? "bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/15 text-foreground" : "bg-card border border-border text-muted-foreground"}`}>
                   <item.icon className="size-5" />
                 </div>
                 <div className="flex-1 min-w-0 border-b border-transparent py-2">
@@ -3046,34 +3941,39 @@ export default function App() {
       </aside>
 
       {/* Right Column: Chat Thread (Main Content) */}
-      <main className="flex-1 flex flex-col h-screen relative bg-background">
+      <main className="flex-1 min-w-0 flex flex-col h-screen relative bg-background">
         {/* Glass Header */}
-        <header className="absolute top-0 inset-x-0 h-[72px] bg-background/85 backdrop-blur-2xl border-b border-border z-10 flex items-center justify-center">
-          <div className="flex flex-col items-center mt-2">
+        <header className="absolute top-0 inset-x-0 h-[72px] bg-background/85 backdrop-blur-2xl border-b border-border z-10 flex items-center justify-between px-4">
+          <button className="md:hidden p-2 -ml-2 text-primary cursor-pointer" onClick={() => setIsMobileMenuOpen(true)}>
+            <Menu className="size-6" />
+          </button>
+          <div className="flex flex-col items-center flex-1 mt-2">
             <img src={resolveImageUrl(patient?.image, patient?.name || "P")} alt="" className="size-8 rounded-full mb-0.5" />
             <div className="text-[11px] text-muted-foreground flex items-center gap-1">
               To: <span className="text-foreground font-medium">{page}</span>
               <ChevronRight className="size-[10px]" />
             </div>
           </div>
+          <div className="w-10 md:hidden" />
         </header>
 
         {/* Scrollable Content Area */}
-        <div className="flex-1 overflow-y-auto pt-[88px] p-6 pb-24">
+        <div className="flex-1 min-w-0 overflow-x-hidden overflow-y-auto pt-[88px] p-6 pb-24">
           <div className="max-w-4xl mx-auto space-y-6">
             <div className="text-center text-[11px] text-muted-foreground font-semibold mb-8">
               Today {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </div>
-            
+
             {page === "Dashboard" && <DashboardView patient={patient} onResolveAlert={handleResolveAlert} fetchPatient={fetchPatient} />}
+            {page === "Care Coordination Hub" && <CareCoordinationHubPanel patient={patient} fetchPatient={fetchPatient} />}
             {page === "Voice Check-In" && <VoiceCheckInPanel patient={patient} fetchPatient={fetchPatient} />}
             {page === "Rocky AI" && <AIAssistantPanel patient={patient} />}
-            {page === "Medications" && <MedicationPanel patient={patient} onToggleMed={handleToggleMed} onAddMed={handleAddMed} />}
-            {page === "Care Plans" && <CarePlansPanel patient={patient} />}
+            {page === "Medications" && <MedicationPanel patient={patient} onToggleMed={handleToggleMed} onAddMed={handleAddMed} setPatient={setPatient} />}
+            {page === "Care Plans" && <CarePlansPanel patient={patient} fetchPatient={fetchPatient} />}
             {page === "Care Team" && <CareTeamPanel patient={patient} fetchPatient={fetchPatient} />}
             {page === "Nutrition" && <NutritionPanel patient={patient} fetchPatient={fetchPatient} />}
             {page === "Reports & FHIR" && <ReportsPanel patient={patient} />}
-            {page === "Settings" && <SettingsPanel patient={patient} onUpdatePatient={handleUpdatePatient} />}
+            {page === "Settings" && <SettingsPanel key={patient?.id} patient={patient} onUpdatePatient={handleUpdatePatient} fetchPatients={fetchPatients} setPatient={setPatient} />}
             {page === "Audit Logs" && <AuditLogsPanel />}
           </div>
         </div>
